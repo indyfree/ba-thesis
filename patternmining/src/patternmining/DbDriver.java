@@ -13,13 +13,16 @@ public class DbDriver {
 	private static final String USER = "root";
 	private static final String PASSWORD = "root";
 
+	public static ArrayList<Review> getReviews() {
+		return getReviews(-1);
+	}
+
 	public static ArrayList<Review> getReviews(int number) {
 		ArrayList<Review> reviews = new ArrayList<Review>();
 
 		try (Connection connection = DriverManager.getConnection(DB_URL, USER, PASSWORD);) {
-			try (PreparedStatement statement = connection.prepareStatement("select * from review_procon2 limit ?")) {
+			try (PreparedStatement statement = connection.prepareStatement("select * from reviews_ciao")) {
 
-				statement.setInt(1, number);
 				ResultSet results = statement.executeQuery();
 
 				while (results.next()) {
@@ -46,20 +49,16 @@ public class DbDriver {
 		return reviews;
 	}
 
-	public static void tagReviews(ArrayList<Review> reviews) {
-
+	public static void writeTaggedReviews(ArrayList<Review> reviews) {
 		try (Connection connection = DriverManager.getConnection(DB_URL, USER, PASSWORD);) {
-			try (PreparedStatement statement = connection.prepareStatement(
-					"UPDATE review_procon2 SET pro_tagged = ?, contra_tagged =? WHERE review_id = ?")) {
+			try (PreparedStatement statement = connection
+					.prepareStatement("UPDATE reviews_ciao SET pro_tagged = ?, contra_tagged =? WHERE review_id = ?")) {
 				for (Review r : reviews) {
 					statement.setString(1, r.getProPOS());
 					statement.setString(2, r.getContraPOS());
 					statement.setInt(3, r.getId());
 					statement.executeUpdate();
-					System.out.println("inserted :" + reviews.indexOf(r));
 				}
-				System.out.println("update finished");
-
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
