@@ -20,7 +20,7 @@ public class DbDriver {
 	public static ArrayList<Review> getReviews(int number) {
 		ArrayList<Review> reviews = new ArrayList<Review>();
 
-		String sqlStatement = "select * from reviews_ciao";
+		String sqlStatement = "select * from reviews_ciao_condensed";
 		if (number > -1) {
 			sqlStatement += " limit ?";
 		}
@@ -38,6 +38,8 @@ public class DbDriver {
 					int id = results.getInt("review_id");
 					String pro = results.getString("pro");
 					String contra = results.getString("contra");
+					String proPOS = results.getString("pro_tagged");
+					String contraPOS = results.getString("contra_tagged");
 
 					Review review = new Review(id);
 
@@ -47,6 +49,14 @@ public class DbDriver {
 
 					if (contra != null && contra.trim() != "") {
 						review.setContra(contra.trim());
+					}
+
+					if (proPOS != null && proPOS.trim() != "") {
+						review.setProPOS(proPOS.trim());
+					}
+
+					if (contraPOS != null && contraPOS.trim() != "") {
+						review.setContraPOS(contraPOS.trim());
 					}
 
 					reviews.add(review);
