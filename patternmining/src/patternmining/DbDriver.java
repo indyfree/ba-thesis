@@ -20,8 +20,17 @@ public class DbDriver {
 	public static ArrayList<Review> getReviews(int number) {
 		ArrayList<Review> reviews = new ArrayList<Review>();
 
+		String sqlStatement = "select * from reviews_ciao";
+		if (number > -1) {
+			sqlStatement += " limit ?";
+		}
+
 		try (Connection connection = DriverManager.getConnection(DB_URL, USER, PASSWORD);) {
-			try (PreparedStatement statement = connection.prepareStatement("select * from reviews_ciao")) {
+			try (PreparedStatement statement = connection.prepareStatement(sqlStatement)) {
+
+				if (number > -1) {
+					statement.setInt(1, number);
+				}
 
 				ResultSet results = statement.executeQuery();
 
