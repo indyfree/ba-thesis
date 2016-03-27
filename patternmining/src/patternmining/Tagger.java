@@ -42,10 +42,10 @@ public class Tagger {
 
 		for (Review r : list) {
 			if (r.getPro() != null) {
-				r.setProPOS(getTagString(r.getPro()));
+				r.setProPOS(getTagOnlyString(r.getPro()));
 			}
 			if (r.getContra() != null) {
-				r.setContraPOS(getTagString(r.getContra()));
+				r.setContraPOS(getTagOnlyString(r.getContra()));
 			}
 		}
 		LOGGER.info("{} elements tagged", list.size());

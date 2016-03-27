@@ -30,11 +30,11 @@ public class DbDriver {
 					Review review = new Review(id);
 
 					if (pro != null && pro.trim() != "") {
-						review.setPro(Tagger.getTagOnlyString(pro.trim()));
+						review.setPro(pro.trim());
 					}
 
 					if (contra != null && contra.trim() != "") {
-						review.setContra(Tagger.getTagOnlyString(contra.trim()));
+						review.setContra(contra.trim());
 					}
 
 					reviews.add(review);
