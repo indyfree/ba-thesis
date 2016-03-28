@@ -20,78 +20,78 @@ import opennlp.tools.util.StringList;
 
 public class NGram {
 
+	final static Logger logger = LoggerFactory.getLogger(NGram.class);
+
 	public static void main(String[] args) {
+		long start = System.currentTimeMillis();
+		ArrayList<Review> reviews = DbDriver.getReviews(200000);
+		logger.info("{} Reviews extracted that took {} seconds", reviews.size(),
+				(System.currentTimeMillis() - start) / 100);
 
-		Logger logger = LoggerFactory.getLogger(NGram.class);
-		ArrayList<Review> reviews = DbDriver.getReviews(200);
-		final int NUMBERREVIEWS = reviews.size();
-
-		NGramModel ngramModel = new NGramModel();
-
-		long startTime = System.currentTimeMillis();
-
-		for (int n = 2; n <= 3; n++) {
-
-			ArrayList<String> ngramList = new ArrayList<String>();
-			int countnGrams = 0;
-
-			for (Review r : reviews) {
-				if (r.getPro() != null) {
-					for (String ngram : ngrams(n, r.getProPOS())) {
-						ngramList.add(ngram);
-						ngramModel.add(new StringList(ngram));
-						countnGrams++;
-					}
-				}
-
-				if (r.getContra() != null) {
-					for (String ngram : ngrams(n, r.getContraPOS())) {
-						ngramList.add(ngram);
-						ngramModel.add(new StringList(ngram));
-						countnGrams++;
-					}
-				}
+		ArrayList<String> reviewTags = new ArrayList<String>();
+		for (Review review : reviews) {
+			if (review.getProPOS() != null) {
+				reviewTags.add(review.getProPOS());
 			}
-
-			long endTime = System.currentTimeMillis();
-			logger.info("{}Gram took {} seconds", n, (endTime - startTime) / 1000);
-
-			Map<String, Integer> ngramMap = new HashMap<String, Integer>();
-
-			startTime = System.currentTimeMillis();
-			for (String ngram : ngramList) {
-				ngramMap.put(ngram, ngramModel.getCount(new StringList(ngram)));
+			if (review.getContraPOS() != null) {
+				reviewTags.add(review.getContraPOS());
 			}
+		}
+		start = System.currentTimeMillis();
+		HashMap<String, Integer> biGrams = getNGramsWithFrequency(2, reviewTags);
+		logger.info("{} different BiGrams in {} sequences identified, that took {} seconds", biGrams.size(),
+				reviewTags.size(), (System.currentTimeMillis() - start) / 100);
 
-			endTime = System.currentTimeMillis();
-			logger.info("Sorting took {} seconds", (endTime - startTime) / 1000);
+		start = System.currentTimeMillis();
+		HashMap<String, Integer> triGrams = getNGramsWithFrequency(3, reviewTags);
+		logger.info("{} different TriGrams in {} sequences identified, that took {} seconds", triGrams.size(),
+				reviewTags.size(), (System.currentTimeMillis() - start) / 100);
 
-			startTime = System.currentTimeMillis();
-			Writer fw = null;
-			try {
+		start = System.currentTimeMillis();
+		writeNGramsToFile(biGrams, "BiGrams.txt");
+		writeNGramsToFile(triGrams, "TriGrams.txt");
+		logger.info("NGrams sorted and wrote to file, that took {} seconds",
+				(System.currentTimeMillis() - start) / 100);
+	}
 
-				Map<String, Integer> sortedMap = sortByValue(ngramMap);
+	private static HashMap<String, Integer> getNGramsWithFrequency(int n, ArrayList<String> nGramList) {
+		final NGramModel nGramModel = new NGramModel();
+		for (String sequence : nGramList) {
+			for (String nGram : nGrams(n, sequence)) {
+				nGramModel.add(new StringList(nGram));
+			}
+		}
 
-				fw = new FileWriter(n + "gram.txt");
-				for (String key : sortedMap.keySet()) {
-					fw.write(key + ",");
-					fw.append(sortedMap.get(key).toString() + ",");
-					float percent = ((float) sortedMap.get(key) * 100 / countnGrams);
-					fw.append(String.format("%.2f", percent));
-					fw.append(System.getProperty("line.separator"));
+		final HashMap<String, Integer> nGramMap = new HashMap<String, Integer>();
+		for (String nGram : nGramModel.toDictionary().asStringSet()) {
+			nGramMap.put(nGram, nGramModel.getCount(new StringList(nGram)));
+		}
+
+		return nGramMap;
+	}
+
+	private static void writeNGramsToFile(HashMap<String, Integer> nGramMap, String fileName) {
+		Writer fw = null;
+		try {
+			Map<String, Integer> sortedMap = sortByValue(nGramMap);
+			fw = new FileWriter(fileName);
+			for (String key : sortedMap.keySet()) {
+				fw.write(key + ",");
+				fw.append(sortedMap.get(key).toString());
+				// float percent = ((float) sortedMap.get(key) * 100 /
+				// countnGrams);
+				// fw.append(String.format("%.2f", percent));
+				fw.append(System.getProperty("line.separator"));
+			}
+		} catch (IOException e) {
+			System.err.println("Could not create File");
+		} finally {
+			if (fw != null)
+				try {
+					fw.close();
+				} catch (IOException e) {
+					e.printStackTrace();
 				}
-			} catch (IOException e) {
-				System.err.println("Could not create File");
-			} finally {
-				if (fw != null)
-					try {
-						fw.close();
-					} catch (IOException e) {
-						e.printStackTrace();
-					}
-			}
-			endTime = System.currentTimeMillis();
-			logger.info("Writing took {} seconds", (endTime - startTime) / 1000);
 		}
 	}
 
@@ -102,7 +102,7 @@ public class NGram {
 	 * @param str
 	 * @return
 	 */
-	public static List<String> ngrams(int n, String str) {
+	private static List<String> nGrams(int n, String str) {
 		List<String> ngrams = new ArrayList<String>();
 		String[] words = str.split(" ");
 		for (int i = 0; i < words.length - n + 1; i++)
@@ -110,7 +110,7 @@ public class NGram {
 		return ngrams;
 	}
 
-	public static String concat(String[] words, int start, int end) {
+	private static String concat(String[] words, int start, int end) {
 		StringBuilder sb = new StringBuilder();
 		for (int i = start; i < end; i++)
 			sb.append((i > start ? " " : "") + words[i]);
@@ -123,7 +123,7 @@ public class NGram {
 	 * @param map
 	 * @return
 	 */
-	public static <K, V extends Comparable<? super V>> Map<K, V> sortByValue(Map<K, V> map) {
+	private static <K, V extends Comparable<? super V>> Map<K, V> sortByValue(Map<K, V> map) {
 		Map<K, V> result = new LinkedHashMap<>();
 		Stream<Entry<K, V>> st = map.entrySet().stream();
 
