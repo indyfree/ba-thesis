@@ -53,4 +53,15 @@ public class Tagger {
 		return taggedList;
 	}
 
+	public ArrayList<String> onlyTagList(ArrayList<String> list) {
+		ArrayList<String> taggedList = new ArrayList<>();
+		for (String element : list) {
+			if (element != null) {
+				taggedList.add(getTagOnlyString(element));
+			}
+		}
+		LOGGER.info("{} elements tagged", taggedList.size());
+		return taggedList;
+	}
+
 }
