@@ -83,4 +83,19 @@ public class DbDriver {
 			e.printStackTrace();
 		}
 	}
+	
+	public static ArrayList<String> getReviewPosSequences(int numberReviews) {
+		ArrayList<Review> reviews = getReviews(numberReviews);
+		ArrayList<String> reviewPosSequences = new ArrayList<String>();
+		
+		for (Review review : reviews) {
+			if(review.getProPOS() != null) {
+				reviewPosSequences.add(review.getProPOS());
+			}
+			if(review.getContraPOS() != null) {
+				reviewPosSequences.add(review.getContraPOS());
+			}
+		}
+		return reviewPosSequences;
+	}
 }
