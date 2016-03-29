@@ -8,22 +8,18 @@ import org.slf4j.LoggerFactory;
 import edu.stanford.nlp.tagger.maxent.MaxentTagger;
 
 public class Tagger {
-	private static MaxentTagger tagger;
-	private static final String MODEL = "taggers/german-hgc.tagger";
+	private MaxentTagger tagger;
 	private static final Logger LOGGER = LoggerFactory.getLogger(Tagger.class);
 
-	public static String getTagString(String stringToTag) {
-		if (tagger == null) {
-			tagger = new MaxentTagger(MODEL);
-		}
+	public Tagger(TaggerModel taggerModel) {
+		this.tagger = new MaxentTagger(taggerModel.getModel());
+	}
+
+	public String getTagString(String stringToTag) {
 		return tagger.tagString(stringToTag);
 	}
 
-	public static String getTagOnlyString(String string) {
-		if (tagger == null) {
-			tagger = new MaxentTagger(MODEL);
-		}
-
+	public String getTagOnlyString(String string) {
 		String[] tokens = tagger.tagString(string).split(" ");
 		String tagString = "";
 
@@ -34,12 +30,7 @@ public class Tagger {
 		return tagString;
 	}
 
-	public static void tagReviews(ArrayList<Review> list) {
-
-		if (tagger == null) {
-			tagger = new MaxentTagger(MODEL);
-		}
-
+	public void tagReviews(ArrayList<Review> list) {
 		for (Review r : list) {
 			if (r.getPro() != null) {
 				r.setProPOS(getTagOnlyString(r.getPro()));
@@ -51,14 +42,8 @@ public class Tagger {
 		LOGGER.info("{} elements tagged", list.size());
 	}
 
-	public static ArrayList<String> tagList(ArrayList<String> list) {
-
+	public ArrayList<String> tagList(ArrayList<String> list) {
 		ArrayList<String> taggedList = new ArrayList<>();
-
-		if (tagger == null) {
-			tagger = new MaxentTagger(MODEL);
-		}
-
 		for (String element : list) {
 			if (element != null) {
 				taggedList.add(getTagString(element));

@@ -9,6 +9,7 @@ public class DataPreProccessor {
 
 	public static void processData() {
 		final Logger logger = LoggerFactory.getLogger(DataPreProccessor.class);
+		final Tagger tagger = new Tagger(TaggerModel.GERMAN);
 
 		long startTime = System.currentTimeMillis();
 		ArrayList<Review> reviews = DbDriver.getReviews();
@@ -18,7 +19,7 @@ public class DataPreProccessor {
 		logger.info("That took {} seconds", (endTime - startTime) / 1000);
 
 		startTime = System.currentTimeMillis();
-		Tagger.tagReviews(reviews);
+		tagger.tagReviews(reviews);
 		endTime = System.currentTimeMillis();
 		logger.info("That took {} seconds", (endTime - startTime) / 1000);
 

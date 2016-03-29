@@ -20,12 +20,14 @@ import opennlp.tools.util.StringList;
 
 public class NGram {
 
-	final static Logger logger = LoggerFactory.getLogger(NGram.class);
+	final static Logger LOGGER = LoggerFactory.getLogger(NGram.class);
 
 	public static void main(String[] args) {
+		final Tagger tagger = new Tagger(TaggerModel.GERMAN);
+
 		long start = System.currentTimeMillis();
 		ArrayList<Review> reviews = DbDriver.getReviews(200000);
-		logger.info("{} Reviews extracted that took {} seconds", reviews.size(),
+		LOGGER.info("{} Reviews extracted that took {} seconds", reviews.size(),
 				(System.currentTimeMillis() - start) / 100);
 
 		ArrayList<String> reviewTags = new ArrayList<String>();
@@ -39,19 +41,36 @@ public class NGram {
 		}
 		start = System.currentTimeMillis();
 		HashMap<String, Integer> biGrams = getNGramsWithFrequency(2, reviewTags);
-		logger.info("{} different BiGrams in {} sequences identified, that took {} seconds", biGrams.size(),
+		LOGGER.info("{} different BiGrams in {} sequences identified, that took {} seconds", biGrams.size(),
 				reviewTags.size(), (System.currentTimeMillis() - start) / 100);
 
 		start = System.currentTimeMillis();
 		HashMap<String, Integer> triGrams = getNGramsWithFrequency(3, reviewTags);
-		logger.info("{} different TriGrams in {} sequences identified, that took {} seconds", triGrams.size(),
+		LOGGER.info("{} different TriGrams in {} sequences identified, that took {} seconds", triGrams.size(),
 				reviewTags.size(), (System.currentTimeMillis() - start) / 100);
 
 		start = System.currentTimeMillis();
 		writeNGramsToFile(biGrams, "BiGrams.txt");
 		writeNGramsToFile(triGrams, "TriGrams.txt");
-		logger.info("NGrams sorted and wrote to file, that took {} seconds",
+		LOGGER.info("NGrams sorted and wrote to file, that took {} seconds",
 				(System.currentTimeMillis() - start) / 100);
+
+		String test = "Das iPhone hat ein groﬂes Display";
+		System.out.println(nGrams(2, test));
+		System.out.println(nGrams(3, test));
+
+		System.out.println(tagger.getTagOnlyString(test));
+
+		System.out.println(nGrams(2, tagger.getTagOnlyString(test)));
+		System.out.println(nGrams(3, tagger.getTagOnlyString(test)));
+
+		ArrayList<String> reperpetoryGrid = new ArrayList<>();
+		reperpetoryGrid.add("No mystique");
+		reperpetoryGrid.add("Classy");
+		reperpetoryGrid.add("Low price");
+		reperpetoryGrid.add("Non european");
+		System.out.println(tagger.tagList(reperpetoryGrid));
+
 	}
 
 	private static HashMap<String, Integer> getNGramsWithFrequency(int n, ArrayList<String> nGramList) {
