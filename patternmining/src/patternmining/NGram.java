@@ -4,13 +4,9 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Writer;
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.HashMap;
-import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
-import java.util.stream.Stream;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -92,7 +88,7 @@ public class NGram {
 	private static void writeNGramsToFile(HashMap<String, Integer> nGramMap, String fileName) {
 		Writer fw = null;
 		try {
-			Map<String, Integer> sortedMap = sortByValue(nGramMap);
+			Map<String, Integer> sortedMap = Util.sortByValue(nGramMap);
 			fw = new FileWriter(fileName);
 			for (String key : sortedMap.keySet()) {
 				fw.write(key + ",");
@@ -134,21 +130,6 @@ public class NGram {
 		for (int i = start; i < end; i++)
 			sb.append((i > start ? " " : "") + words[i]);
 		return sb.toString();
-	}
-
-	/**
-	 * Taken from http://stackoverflow.com/a/2581754
-	 *
-	 * @param map
-	 * @return
-	 */
-	private static <K, V extends Comparable<? super V>> Map<K, V> sortByValue(Map<K, V> map) {
-		Map<K, V> result = new LinkedHashMap<>();
-		Stream<Entry<K, V>> st = map.entrySet().stream();
-
-		st.sorted(Comparator.comparing(e -> e.getValue())).forEachOrdered(e -> result.put(e.getKey(), e.getValue()));
-
-		return result;
 	}
 
 }
