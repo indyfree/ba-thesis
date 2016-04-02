@@ -28,6 +28,7 @@ public class MiningSequentialPatternsAgrawan {
 		}
 
 		System.out.println(sequenceDB.toString());
+
 		// computeClosedSequentialPatternsBIDEPLUS(sequenceDB, 2);
 
 	}
