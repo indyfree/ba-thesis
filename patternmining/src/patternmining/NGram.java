@@ -59,7 +59,7 @@ public class NGram {
 				(System.currentTimeMillis() - start) / 100);
 	}
 
-	private static HashMap<String, Integer> getNGramsWithFrequency(int n, ArrayList<String> nGramList) {
+	public static HashMap<String, Integer> getNGramsWithFrequency(int n, ArrayList<String> nGramList) {
 		final NGramModel nGramModel = new NGramModel();
 		for (String sequence : nGramList) {
 			for (String nGram : nGrams(n, sequence)) {
@@ -75,7 +75,7 @@ public class NGram {
 		return nGramMap;
 	}
 
-	private static void writeNGramsToFile(HashMap<String, Integer> nGramMap, String fileName) {
+	public static void writeNGramsToFile(HashMap<String, Integer> nGramMap, String fileName) {
 		Writer fw = null;
 		try {
 			Map<String, Integer> sortedMap = Util.sortByValue(nGramMap);
