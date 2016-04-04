@@ -9,17 +9,17 @@ import org.slf4j.LoggerFactory;
 
 import ca.pfv.spmf.algorithms.sequentialpatterns.lapin.AlgoLAPIN_LCI;
 
-public class ClosedSequentialPattern_LAPIN_File implements Algorithm {
-	final static Logger LOGGER = LoggerFactory.getLogger(ClosedSequentialPattern_LAPIN_File.class);
-	final static String INPUT_FILEPATH = "ClosedSequentialPattern_LAPIN_input.txt";
-	final static String RESULT_FILEPATH = "ClosedSequentialPattern_LAPIN_results.txt";
+public class LAPIN implements Algorithm {
+	final static Logger LOGGER = LoggerFactory.getLogger(LAPIN.class);
+	final static String INPUT_FILEPATH = "LAPIN_input.txt";
+	final static String RESULT_FILEPATH = "LAPIN_results.txt";
 
 	private int minSup;
 	private int totalSequences;
 	private AlgoLAPIN_LCI lapin;
 	private Map<String, Integer> posToInt;
 
-	public ClosedSequentialPattern_LAPIN_File(int minSup) {
+	public LAPIN(int minSup) {
 		this.setMinSup(minSup);
 		this.lapin = new AlgoLAPIN_LCI();
 	}
@@ -35,6 +35,7 @@ public class ClosedSequentialPattern_LAPIN_File implements Algorithm {
 		printResults();
 	}
 
+	@Override
 	public void printStatistics() {
 		lapin.printStatistics();
 	}

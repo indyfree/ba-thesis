@@ -10,15 +10,15 @@ import org.slf4j.LoggerFactory;
 import ca.pfv.spmf.algorithms.sequentialpatterns.BIDE_and_prefixspan_with_strings.AlgoBIDEPlus_withStrings;
 import ca.pfv.spmf.input.sequence_database_list_strings.SequenceDatabase;
 
-public class ClosedSequentialPattern_BIDE_Memory implements Algorithm {
-	final static Logger LOGGER = LoggerFactory.getLogger(ClosedSequentialPattern_BIDE_Memory.class);
-	final static String FILEPATH = "ClosedSequentialPattern_BIDE_File_results.txt";
+public class BIDE implements Algorithm {
+	final static Logger LOGGER = LoggerFactory.getLogger(BIDE.class);
+	final static String FILEPATH = "BIDE_results.txt";
 
 	private int minSup;
 	private int totalSequences;
 	private AlgoBIDEPlus_withStrings bide;
 
-	public ClosedSequentialPattern_BIDE_Memory(int minSup) {
+	public BIDE(int minSup) {
 		this.setMinSup(minSup);
 		this.bide = new AlgoBIDEPlus_withStrings();
 	}
@@ -32,6 +32,7 @@ public class ClosedSequentialPattern_BIDE_Memory implements Algorithm {
 		printResults();
 	}
 
+	@Override
 	public void printStatistics() {
 		bide.printStatistics(0);
 	}
