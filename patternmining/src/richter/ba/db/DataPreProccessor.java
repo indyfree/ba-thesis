@@ -11,9 +11,10 @@ import richter.ba.utils.TaggerModel;
 
 public class DataPreProccessor {
 
-	public static void processData() {
-		final Logger logger = LoggerFactory.getLogger(DataPreProccessor.class);
-		final Tagger tagger = new Tagger(TaggerModel.GERMAN);
+	final static Logger logger = LoggerFactory.getLogger(DataPreProccessor.class);
+	final static Tagger tagger = new Tagger(TaggerModel.GERMAN);
+
+	public static void tagReviews() {
 
 		long startTime = System.currentTimeMillis();
 		ArrayList<Review> reviews = DbDriver.getReviews();
