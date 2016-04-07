@@ -1,4 +1,4 @@
-package patternmining;
+package richter.ba.algorithms;
 
 import java.io.FileWriter;
 import java.io.IOException;
@@ -10,9 +10,9 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import algorithm.Algorithm;
 import opennlp.tools.ngram.NGramModel;
 import opennlp.tools.util.StringList;
+import richter.ba.utils.Util;
 
 public class NGram implements Algorithm {
 

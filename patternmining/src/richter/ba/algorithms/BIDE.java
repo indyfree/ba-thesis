@@ -1,4 +1,4 @@
-package patternmining;
+package richter.ba.algorithms;
 
 import java.io.IOException;
 import java.util.List;
@@ -7,9 +7,9 @@ import java.util.Map;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import algorithm.Algorithm;
 import ca.pfv.spmf.algorithms.sequentialpatterns.BIDE_and_prefixspan_with_strings.AlgoBIDEPlus_withStrings;
 import ca.pfv.spmf.input.sequence_database_list_strings.SequenceDatabase;
+import richter.ba.utils.Util;
 
 public class BIDE implements Algorithm {
 	final static Logger LOGGER = LoggerFactory.getLogger(BIDE.class);

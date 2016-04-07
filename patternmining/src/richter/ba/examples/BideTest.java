@@ -1,14 +1,14 @@
-package examples;
+package richter.ba.examples;
 
 import java.util.ArrayList;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import algorithm.Algorithm;
-import patternmining.BIDE;
-import patternmining.DbDriver;
-import patternmining.LAPIN;
+import richter.ba.algorithms.Algorithm;
+import richter.ba.algorithms.BIDE;
+import richter.ba.algorithms.LAPIN;
+import richter.ba.db.DbDriver;
 
 public class BideTest {
 	final static Logger LOGGER = LoggerFactory.getLogger(LAPIN.class);

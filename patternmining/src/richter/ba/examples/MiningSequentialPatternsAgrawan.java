@@ -1,4 +1,4 @@
-package examples;
+package richter.ba.examples;
 
 import java.util.ArrayList;
 import java.util.Arrays;

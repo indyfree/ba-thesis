@@ -1,13 +1,13 @@
-package examples;
+package richter.ba.examples;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 
-import algorithm.Algorithm;
-import patternmining.BIDE;
-import patternmining.NGram;
-import patternmining.Tagger;
-import patternmining.TaggerModel;
+import richter.ba.algorithms.Algorithm;
+import richter.ba.algorithms.BIDE;
+import richter.ba.algorithms.NGram;
+import richter.ba.utils.Tagger;
+import richter.ba.utils.TaggerModel;
 
 public class NGramTest {
 

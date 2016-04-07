@@ -1,9 +1,9 @@
-package examples;
+package richter.ba.examples;
 
 import java.util.ArrayList;
 
-import patternmining.Tagger;
-import patternmining.TaggerModel;
+import richter.ba.utils.Tagger;
+import richter.ba.utils.TaggerModel;
 
 public class BeetleBCM {
 	public static void main(String[] args) {

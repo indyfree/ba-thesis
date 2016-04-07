@@ -1,9 +1,9 @@
-package examples;
+package richter.ba.examples;
 
 import java.util.ArrayList;
 
-import patternmining.BIDE;
-import patternmining.LAPIN;
+import richter.ba.algorithms.BIDE;
+import richter.ba.algorithms.LAPIN;
 
 public class ClosedSequencesWu {
 

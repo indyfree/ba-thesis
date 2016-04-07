@@ -1,4 +1,4 @@
-package patternmining;
+package richter.ba.utils;
 
 public enum TaggerModel {
 	GERMAN("taggers/german-hgc.tagger"), ENGLISH("taggers/english-left3words-distsim.tagger");

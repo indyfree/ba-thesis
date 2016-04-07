@@ -1,4 +1,4 @@
-package patternmining;
+package richter.ba.algorithms;
 
 import java.io.IOException;
 import java.util.List;
@@ -7,8 +7,8 @@ import java.util.Map;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import algorithm.Algorithm;
 import ca.pfv.spmf.algorithms.sequentialpatterns.lapin.AlgoLAPIN_LCI;
+import richter.ba.utils.Util;
 
 public class LAPIN implements Algorithm {
 	final static Logger LOGGER = LoggerFactory.getLogger(LAPIN.class);

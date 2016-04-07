@@ -1,4 +1,4 @@
-package algorithm;
+package richter.ba.algorithms;
 
 import java.util.List;
 

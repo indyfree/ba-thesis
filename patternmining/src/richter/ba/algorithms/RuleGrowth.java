@@ -1,4 +1,4 @@
-package patternmining;
+package richter.ba.algorithms;
 
 import java.io.IOException;
 import java.util.List;
@@ -7,8 +7,9 @@ import java.util.Map;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import algorithm.Algorithm;
 import ca.pfv.spmf.algorithms.sequential_rules.rulegrowth.AlgoRULEGROWTH;
+import richter.ba.entities.SequentialRule;
+import richter.ba.utils.Util;
 
 public class RuleGrowth implements Algorithm {
 
@@ -53,7 +54,7 @@ public class RuleGrowth implements Algorithm {
 	}
 
 	private void printResults() {
-		for (SequentialRule rule : Util.readRulesFromFile(this.RESULT_FILEPATH, this.posToInt)) {
+		for (SequentialRule rule : Util.readRulesFromFile(RESULT_FILEPATH, this.posToInt)) {
 			for (int setElement : rule.getItemSetI()) {
 				System.out.print(setElement + ",");
 			}

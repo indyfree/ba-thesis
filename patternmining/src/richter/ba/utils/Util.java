@@ -1,4 +1,4 @@
-package patternmining;
+package richter.ba.utils;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -17,6 +17,7 @@ import java.util.stream.Stream;
 
 import ca.pfv.spmf.input.sequence_database_list_strings.Sequence;
 import ca.pfv.spmf.input.sequence_database_list_strings.SequenceDatabase;
+import richter.ba.entities.SequentialRule;
 
 public class Util {
 	/**

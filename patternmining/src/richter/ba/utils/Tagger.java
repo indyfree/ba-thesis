@@ -1,4 +1,4 @@
-package patternmining;
+package richter.ba.utils;
 
 import java.util.ArrayList;
 
@@ -6,6 +6,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import edu.stanford.nlp.tagger.maxent.MaxentTagger;
+import richter.ba.entities.Review;
 
 public class Tagger {
 	private MaxentTagger tagger;

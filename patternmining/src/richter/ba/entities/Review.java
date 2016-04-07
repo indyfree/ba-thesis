@@ -1,4 +1,4 @@
-package patternmining;
+package richter.ba.entities;
 
 public class Review {
 

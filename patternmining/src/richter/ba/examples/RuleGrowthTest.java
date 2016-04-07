@@ -1,9 +1,9 @@
-package examples;
+package richter.ba.examples;
 
 import java.util.ArrayList;
 
-import patternmining.DbDriver;
-import patternmining.RuleGrowth;
+import richter.ba.algorithms.RuleGrowth;
+import richter.ba.db.DbDriver;
 
 public class RuleGrowthTest {
 
