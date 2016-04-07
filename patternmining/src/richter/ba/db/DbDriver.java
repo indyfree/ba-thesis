@@ -70,14 +70,16 @@ public class DbDriver {
 		return reviews;
 	}
 
-	public static void writeTaggedReviews(ArrayList<Review> reviews) {
+	public static void updateReviews(ArrayList<Review> reviews) {
 		try (Connection connection = DriverManager.getConnection(DB_URL, USER, PASSWORD);) {
 			try (PreparedStatement statement = connection
-					.prepareStatement("UPDATE reviews_ciao SET pro_tagged = ?, contra_tagged =? WHERE review_id = ?")) {
+					.prepareStatement("UPDATE reviews_ciao SET pro = ?, contra = ?, pro_tagged = ?, contra_tagged =? WHERE review_id = ?")) {
 				for (Review r : reviews) {
-					statement.setString(1, r.getProPOS());
-					statement.setString(2, r.getContraPOS());
-					statement.setInt(3, r.getId());
+					statement.setString(1, r.getPro());
+					statement.setString(2, r.getContra());
+					statement.setString(3, r.getProPOS());
+					statement.setString(4, r.getContraPOS());
+					statement.setInt(5, r.getId());
 					statement.executeUpdate();
 				}
 			}

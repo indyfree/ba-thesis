@@ -28,7 +28,7 @@ public class DataPreProccessor {
 		logger.info("That took {} seconds", (endTime - startTime) / 1000);
 
 		startTime = System.currentTimeMillis();
-		DbDriver.writeTaggedReviews(reviews);
+		DbDriver.updateReviews(reviews);
 		endTime = System.currentTimeMillis();
 		logger.info("Writing {} tagged reviews to DB ", reviews.size());
 		logger.info("That took {} seconds", (endTime - startTime) / 1000);
