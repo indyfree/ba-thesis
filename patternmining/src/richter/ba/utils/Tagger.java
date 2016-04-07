@@ -12,7 +12,7 @@ public class Tagger {
 	private MaxentTagger tagger;
 	private static final Logger LOGGER = LoggerFactory.getLogger(Tagger.class);
 
-	public Tagger(TaggerModel taggerModel) {
+	public Tagger(TagSet taggerModel) {
 		this.tagger = new MaxentTagger(taggerModel.getModel());
 	}
 

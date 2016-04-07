@@ -7,12 +7,12 @@ import org.slf4j.LoggerFactory;
 
 import richter.ba.entities.Review;
 import richter.ba.utils.Tagger;
-import richter.ba.utils.TaggerModel;
+import richter.ba.utils.TagSet;
 
 public class DataPreProccessor {
 
 	final static Logger logger = LoggerFactory.getLogger(DataPreProccessor.class);
-	final static Tagger tagger = new Tagger(TaggerModel.GERMAN);
+	final static Tagger tagger = new Tagger(TagSet.GERMAN);
 
 	public static void tagReviews() {
 

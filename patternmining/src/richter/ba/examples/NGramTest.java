@@ -7,7 +7,7 @@ import richter.ba.algorithms.Algorithm;
 import richter.ba.algorithms.BIDE;
 import richter.ba.algorithms.NGram;
 import richter.ba.utils.Tagger;
-import richter.ba.utils.TaggerModel;
+import richter.ba.utils.TagSet;
 
 public class NGramTest {
 
@@ -19,7 +19,7 @@ public class NGramTest {
 		productReviews.add("Der Akku");
 		productReviews.add("Der Sucher fehlt");
 
-		Tagger tagger = new Tagger(TaggerModel.GERMAN);
+		Tagger tagger = new Tagger(TagSet.GERMAN);
 
 		ArrayList<String> taggedProductReviews = tagger.onlyTagList(productReviews);
 

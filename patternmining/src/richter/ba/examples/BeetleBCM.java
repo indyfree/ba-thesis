@@ -3,11 +3,11 @@ package richter.ba.examples;
 import java.util.ArrayList;
 
 import richter.ba.utils.Tagger;
-import richter.ba.utils.TaggerModel;
+import richter.ba.utils.TagSet;
 
 public class BeetleBCM {
 	public static void main(String[] args) {
-		final Tagger tagger = new Tagger(TaggerModel.ENGLISH);
+		final Tagger tagger = new Tagger(TagSet.ENGLISH);
 
 		ArrayList<String> beetleAssociations = new ArrayList<>();
 		beetleAssociations.add("fun to drive");

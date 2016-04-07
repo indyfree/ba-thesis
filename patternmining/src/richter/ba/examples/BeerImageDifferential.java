@@ -3,12 +3,12 @@ package richter.ba.examples;
 import java.util.ArrayList;
 
 import richter.ba.utils.Tagger;
-import richter.ba.utils.TaggerModel;
+import richter.ba.utils.TagSet;
 
 public class BeerImageDifferential {
 
 	public static void main(String[] args) {
-		final Tagger tagger = new Tagger(TaggerModel.GERMAN);
+		final Tagger tagger = new Tagger(TagSet.GERMAN);
 
 		ArrayList<String> beerAssociations = new ArrayList<>();
 		beerAssociations.add("Das iPhone hat ein groﬂes Display");
