@@ -8,16 +8,15 @@ import org.slf4j.LoggerFactory;
 import richter.ba.algorithms.Algorithm;
 import richter.ba.algorithms.BIDE;
 import richter.ba.algorithms.LAPIN;
-import richter.ba.db.DbDriver;
+import richter.ba.db.ReviewRepository;
 
 public class BideTest {
 	final static Logger LOGGER = LoggerFactory.getLogger(LAPIN.class);
 
 	public static void main(String[] args) {
 
-		// ArrayList<String> sequenceStrings =
-		// DbDriver.getReviewPosSequences(500000);
-		ArrayList<String> sequenceStringsTokenized = DbDriver.getTokenizedReviewPosSequences(100000);
+		ReviewRepository rr = new ReviewRepository();
+		ArrayList<String> sequenceStringsTokenized = rr.getTokenizedReviewPosSequences(100000);
 		final int SUPPORT = sequenceStringsTokenized.size() / 20;
 
 		//

@@ -11,15 +11,21 @@ import richter.ba.entities.Review;
 
 public class DbDriver {
 
-	private static final String DB_URL = "jdbc:mysql://localhost:3306/review_ciao_2014";
-	private static final String USER = "root";
-	private static final String PASSWORD = "root";
+	private String url;
+	private String user;
+	private String password;
 
-	public static ArrayList<Review> getReviews() {
+	public DbDriver(String url, String user, String password) {
+		this.url = url;
+		this.user = user;
+		this.password = password;
+	}
+
+	public ArrayList<Review> getReviews() {
 		return getReviews(-1);
 	}
 
-	public static ArrayList<Review> getReviews(int number) {
+	public ArrayList<Review> getReviews(int number) {
 		ArrayList<Review> reviews = new ArrayList<Review>();
 
 		String sqlStatement = "select * from reviews_ciao_condensed";
@@ -27,7 +33,7 @@ public class DbDriver {
 			sqlStatement += " limit ?";
 		}
 
-		try (Connection connection = DriverManager.getConnection(DB_URL, USER, PASSWORD);) {
+		try (Connection connection = DriverManager.getConnection(this.url, this.user, this.password);) {
 			try (PreparedStatement statement = connection.prepareStatement(sqlStatement)) {
 
 				if (number > -1) {
@@ -70,10 +76,10 @@ public class DbDriver {
 		return reviews;
 	}
 
-	public static void updateReviews(ArrayList<Review> reviews) {
-		try (Connection connection = DriverManager.getConnection(DB_URL, USER, PASSWORD);) {
-			try (PreparedStatement statement = connection
-					.prepareStatement("UPDATE reviews_ciao SET pro = ?, contra = ?, pro_tagged = ?, contra_tagged =? WHERE review_id = ?")) {
+	public void updateReviews(ArrayList<Review> reviews) {
+		try (Connection connection = DriverManager.getConnection(this.url, this.user, this.password);) {
+			try (PreparedStatement statement = connection.prepareStatement(
+					"UPDATE reviews_ciao SET pro = ?, contra = ?, pro_tagged = ?, contra_tagged =? WHERE review_id = ?")) {
 				for (Review r : reviews) {
 					statement.setString(1, r.getPro());
 					statement.setString(2, r.getContra());
@@ -88,34 +94,4 @@ public class DbDriver {
 		}
 	}
 
-	public static ArrayList<String> getReviewPosSequences(int numberReviews) {
-		ArrayList<Review> reviews = getReviews(numberReviews);
-		ArrayList<String> reviewPosSequences = new ArrayList<String>();
-
-		for (Review review : reviews) {
-			if (review.getProPOS() != null) {
-				reviewPosSequences.add(review.getProPOS());
-			}
-			if (review.getContraPOS() != null) {
-				reviewPosSequences.add(review.getContraPOS());
-			}
-		}
-		return reviewPosSequences;
-	}
-
-	public static ArrayList<String> getTokenizedReviewPosSequences(int numberReviews) {
-		ArrayList<String> sequences = getReviewPosSequences(numberReviews);
-		ArrayList<String> tokenizedReviews = new ArrayList<>();
-
-		for (String sequence : sequences) {
-			String[] token = sequence.split("\\$,|\\$\\.|\\$\\[|KON");
-			for (String t : token) {
-				t = t.trim();
-				if (!t.isEmpty()) {
-					tokenizedReviews.add(t);
-				}
-			}
-		}
-		return tokenizedReviews;
-	}
 }

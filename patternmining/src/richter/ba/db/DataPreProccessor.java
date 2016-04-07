@@ -17,7 +17,8 @@ public class DataPreProccessor {
 	public static void tagReviews() {
 
 		long startTime = System.currentTimeMillis();
-		ArrayList<Review> reviews = DbDriver.getReviews();
+		ReviewRepository rr = new ReviewRepository();
+		ArrayList<Review> reviews = rr.getReviews();
 		long endTime = System.currentTimeMillis();
 
 		logger.info("{} Reviews read", reviews.size());
@@ -29,7 +30,7 @@ public class DataPreProccessor {
 		logger.info("That took {} seconds", (endTime - startTime) / 1000);
 
 		startTime = System.currentTimeMillis();
-		DbDriver.updateReviews(reviews);
+		rr.updateReviews(reviews);
 		endTime = System.currentTimeMillis();
 		logger.info("Writing {} tagged reviews to DB ", reviews.size());
 		logger.info("That took {} seconds", (endTime - startTime) / 1000);
