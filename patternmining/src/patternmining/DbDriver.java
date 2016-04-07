@@ -104,7 +104,7 @@ public class DbDriver {
 		ArrayList<String> tokenizedReviews = new ArrayList<>();
 
 		for (String sequence : sequences) {
-			String[] token = sequence.split("\\$,|\\$\\.|\\$\\[");
+			String[] token = sequence.split("\\$,|\\$\\.|\\$\\[|KON");
 			for (String t : token) {
 				t = t.trim();
 				if (!t.isEmpty()) {

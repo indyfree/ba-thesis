@@ -1,4 +1,4 @@
-package patternmining;
+package algorithm;
 
 import java.util.List;
 

@@ -10,6 +10,7 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import algorithm.Algorithm;
 import opennlp.tools.ngram.NGramModel;
 import opennlp.tools.util.StringList;
 

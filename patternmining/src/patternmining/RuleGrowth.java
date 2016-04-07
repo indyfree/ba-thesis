@@ -7,6 +7,7 @@ import java.util.Map;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import algorithm.Algorithm;
 import ca.pfv.spmf.algorithms.sequential_rules.rulegrowth.AlgoRULEGROWTH;
 
 public class RuleGrowth implements Algorithm {
@@ -35,7 +36,7 @@ public class RuleGrowth implements Algorithm {
 		Util.writeStringSequencesToIntFile(input, this.posToInt, INPUT_FILEPATH);
 
 		this.computeRules(this.minSup, this.minConf);
-		System.out.println(this.posToInt);
+		this.printResults();
 
 	}
 
@@ -51,9 +52,23 @@ public class RuleGrowth implements Algorithm {
 
 	}
 
+	private void printResults() {
+		for (SequentialRule rule : Util.readRulesFromFile(this.RESULT_FILEPATH, this.posToInt)) {
+			for (int setElement : rule.getItemSetI()) {
+				System.out.print(setElement + ",");
+			}
+			System.out.print(" ===> ");
+			for (int setElement : rule.getItemSetJ()) {
+				System.out.print(setElement + ",");
+			}
+			System.out.print(" Support: " + rule.getSupport() + "\n");
+
+		}
+	}
+
 	@Override
 	public void printStatistics() {
-		// TODO Auto-generated method stub
+		this.ruleGrowth.printStats();
 
 	}
 

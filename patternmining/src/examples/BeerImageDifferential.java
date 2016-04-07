@@ -11,7 +11,7 @@ public class BeerImageDifferential {
 		final Tagger tagger = new Tagger(TaggerModel.GERMAN);
 
 		ArrayList<String> beerAssociations = new ArrayList<>();
-		beerAssociations.add("hohe Qualit‰t");
+		beerAssociations.add("Das iPhone hat ein groﬂes Display");
 		beerAssociations.add("sympathische Marke");
 		beerAssociations.add("guter Geschmack");
 		beerAssociations.add("gute Herkunft");
