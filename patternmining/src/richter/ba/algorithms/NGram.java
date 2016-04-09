@@ -29,7 +29,12 @@ public class NGram implements Algorithm {
 	@Override
 	public void run(List<String> input) {
 		this.nGramToQuantity = getNGramsWithQuantity(n, input);
-		this.printResults();
+		this.printResults(this.nGramToQuantity.size());
+	}
+
+	public void run(List<String> input, int k) {
+		this.nGramToQuantity = getNGramsWithQuantity(n, input);
+		this.printResults(k);
 	}
 
 	private HashMap<String, Integer> getNGramsWithQuantity(int n, List<String> sequenceList) {
@@ -58,10 +63,12 @@ public class NGram implements Algorithm {
 		return nGramMap;
 	}
 
-	private void printResults() {
-		for (String nGram : this.nGramToQuantity.keySet()) {
+	private void printResults(int k) {
+		for (int i = 0; i < k; i++) {
+			String nGram = (String) nGramToQuantity.keySet().toArray()[i];
 			LOGGER.info("[{}] occured {} times", nGram, nGramToQuantity.get(nGram));
 		}
+
 	}
 
 	public void writeNGramsToFile(String fileName) {
