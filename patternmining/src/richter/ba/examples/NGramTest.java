@@ -1,29 +1,21 @@
 package richter.ba.examples;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 
-import richter.ba.algorithms.Algorithm;
 import richter.ba.algorithms.NGram;
-import richter.ba.utils.TagSet;
-import richter.ba.utils.Tagger;
+import richter.ba.db.ReviewRepository;
 
 public class NGramTest {
 
 	public static void main(String[] args) {
-		ArrayList<String> productReviews = new ArrayList<>();
+		ReviewRepository rr = new ReviewRepository();
+		ArrayList<String> productReviews = rr.getTokenizedReviewPosSequences(100000000);
 
-		productReviews.addAll(Arrays.asList("Super Aufnahmen, gute Bedienung, wertig".split(",")));
-		productReviews.addAll(Arrays.asList("klein, leicht, schönes Design".split(",")));
-		productReviews.add("Der Akku");
-		productReviews.add("Der Sucher fehlt");
+		// Algorithm biGram = new NGram(2);
+		// biGram.run(productReviews);
 
-		Tagger tagger = new Tagger(TagSet.GERMAN);
-
-		ArrayList<String> taggedProductReviews = tagger.onlyTagList(productReviews);
-
-		Algorithm biGram = new NGram(2);
-		biGram.run(taggedProductReviews);
+		NGram triGram = new NGram(2);
+		triGram.run(productReviews, 10);
 		//
 		// BIDE bide = new BIDE(1);
 		// bide.run(taggedProductReviews);

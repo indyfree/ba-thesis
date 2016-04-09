@@ -26,6 +26,9 @@ public class BeerImageDifferential {
 
 		NGram biGram = new NGram(2);
 		biGram.run(taggedReviews);
+
+		NGram uniGram = new NGram(1);
+		uniGram.run(taggedReviews);
 	}
 
 }

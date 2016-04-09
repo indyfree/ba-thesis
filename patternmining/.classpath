@@ -12,5 +12,6 @@
 	<classpathentry kind="lib" path="lib/slf4j-simple.jar"/>
 	<classpathentry kind="lib" path="lib/opennlp-tools-1.6.0.jar"/>
 	<classpathentry kind="lib" path="lib/spmf.jar" sourcepath="C:/Users/tr/Downloads/spmf"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
