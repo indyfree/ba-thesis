@@ -4,10 +4,9 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 import richter.ba.algorithms.Algorithm;
-import richter.ba.algorithms.BIDE;
 import richter.ba.algorithms.NGram;
-import richter.ba.utils.Tagger;
 import richter.ba.utils.TagSet;
+import richter.ba.utils.Tagger;
 
 public class NGramTest {
 
@@ -25,9 +24,9 @@ public class NGramTest {
 
 		Algorithm biGram = new NGram(2);
 		biGram.run(taggedProductReviews);
-
-		BIDE bide = new BIDE(1);
-		bide.run(taggedProductReviews);
+		//
+		// BIDE bide = new BIDE(1);
+		// bide.run(taggedProductReviews);
 
 	}
 }

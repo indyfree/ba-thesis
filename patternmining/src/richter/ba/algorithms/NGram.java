@@ -3,13 +3,14 @@ package richter.ba.algorithms;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Writer;
-import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import opennlp.tools.ngram.NGramGenerator;
 import opennlp.tools.ngram.NGramModel;
 import opennlp.tools.util.StringList;
 import richter.ba.utils.Util;
@@ -31,12 +32,15 @@ public class NGram implements Algorithm {
 		this.printResults();
 	}
 
-	private HashMap<String, Integer> getNGramsWithQuantity(int n, List<String> nGramList) {
+	private HashMap<String, Integer> getNGramsWithQuantity(int n, List<String> sequenceList) {
 		long startTime = System.currentTimeMillis();
 
 		NGramModel nGramModel = new NGramModel();
-		for (String sequence : nGramList) {
-			for (String nGram : nGrams(n, sequence)) {
+		for (String sequence : sequenceList) {
+
+			List<String> nGrams = NGramGenerator.generate(Arrays.asList(sequence.split(" ")), n, " ");
+
+			for (String nGram : nGrams) {
 				nGramModel.add(new StringList(nGram));
 			}
 		}
@@ -48,8 +52,8 @@ public class NGram implements Algorithm {
 
 		nGramMap = (HashMap<String, Integer>) Util.sortByValue(nGramMap);
 
-		LOGGER.info("Mined {} Sequences and found {} {}Grams in {} seconds", nGramList.size(), nGramMap.size(), this.n,
-				(System.currentTimeMillis() - startTime) / 100);
+		LOGGER.info("Mined {} Sequences and found {} {}Grams in {} seconds", sequenceList.size(), nGramMap.size(),
+				this.n, (System.currentTimeMillis() - startTime) / 100);
 
 		return nGramMap;
 	}
@@ -84,27 +88,27 @@ public class NGram implements Algorithm {
 		}
 	}
 
-	/**
-	 * Taken from http://stackoverflow.com/a/3656824
-	 *
-	 * @param n
-	 * @param str
-	 * @return
-	 */
-	private List<String> nGrams(int n, String str) {
-		List<String> ngrams = new ArrayList<String>();
-		String[] words = str.split(" ");
-		for (int i = 0; i < words.length - n + 1; i++)
-			ngrams.add(concat(words, i, i + n));
-		return ngrams;
-	}
-
-	private String concat(String[] words, int start, int end) {
-		StringBuilder sb = new StringBuilder();
-		for (int i = start; i < end; i++)
-			sb.append((i > start ? " " : "") + words[i]);
-		return sb.toString();
-	}
+	// /**
+	// * Taken from http://stackoverflow.com/a/3656824
+	// *
+	// * @param n
+	// * @param str
+	// * @return
+	// */
+	// private List<String> nGrams(int n, String str) {
+	// List<String> ngrams = new ArrayList<String>();
+	// String[] words = str.split(" ");
+	// for (int i = 0; i < words.length - n + 1; i++)
+	// ngrams.add(concat(words, i, i + n));
+	// return ngrams;
+	// }
+	//
+	// private String concat(String[] words, int start, int end) {
+	// StringBuilder sb = new StringBuilder();
+	// for (int i = start; i < end; i++)
+	// sb.append((i > start ? " " : "") + words[i]);
+	// return sb.toString();
+	// }
 
 	@Override
 	public void printStatistics() {
