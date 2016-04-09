@@ -10,13 +10,13 @@ import richter.ba.utils.Filter;
 
 public class StopWordListTest {
 
+	private static final String[] stopWords = { "World", "Foo" };
+	private static final List<String> fullList = Arrays.asList("Hello World, Hello Foo, Bar, World, Hello".split(", "));
+
 	@Test
 	public void testFilterSequences() {
-		List<String> fullList = Arrays.asList("Hello World, Hello Foo, Bar, World, Hello".split(", "));
-		System.out.println(fullList);
 
-		List<String> stopWords = Arrays.asList("World, Foo".split(", "));
-		System.out.println(stopWords);
+		System.out.println(fullList);
 
 		List<String> expectedList = Arrays.asList("Bar, Hello".split(", "));
 
@@ -28,11 +28,7 @@ public class StopWordListTest {
 
 	@Test
 	public void testFilterWords() {
-		List<String> fullList = Arrays.asList("Hello World, Hello Foo, Bar, World, Hello".split(", "));
 		System.out.println(fullList);
-
-		List<String> stopWords = Arrays.asList("World, Foo".split(", "));
-		System.out.println(stopWords);
 
 		List<String> expectedList = Arrays.asList("Hello, Hello, Bar, Hello".split(", "));
 
