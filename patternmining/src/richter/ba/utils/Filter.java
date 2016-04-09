@@ -1,16 +1,17 @@
 package richter.ba.utils;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class Filter {
 
-	public static List<String> filterSequences(List<String> wordSequences, List<String> excludeSequenceList) {
+	public static List<String> filterSequences(List<String> wordSequences, String[] excludeSequenceList) {
 		List<String> filteredSequences = new ArrayList<String>();
 		for (String sequence : wordSequences) {
 			boolean onList = false;
 			for (String word : sequence.split(" ")) {
-				if (excludeSequenceList.contains(word)) {
+				if (Arrays.asList(excludeSequenceList).contains(word)) {
 					onList = true;
 				}
 			}
@@ -21,7 +22,7 @@ public class Filter {
 		return filteredSequences;
 	}
 
-	public static List<String> filterWords(List<String> wordSequences, List<String> excludeWordList) {
+	public static List<String> filterWords(List<String> wordSequences, String[] excludeWordList) {
 		List<String> filteredSequences = new ArrayList<String>();
 		for (String sequence : wordSequences) {
 
