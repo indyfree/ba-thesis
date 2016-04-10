@@ -46,22 +46,6 @@ public class ReviewRepository {
 		return reviewPosSequences;
 	}
 
-	public ArrayList<String> getTokenizedReviewPosSequences(int numberReviews) {
-		ArrayList<String> sequences = getReviewPosSequences(numberReviews);
-		ArrayList<String> tokenizedReviews = new ArrayList<>();
-
-		for (String sequence : sequences) {
-			String[] token = sequence.split("\\$,|\\$\\.|\\$\\[|KON");
-			for (String t : token) {
-				t = t.trim();
-				if (!t.isEmpty()) {
-					tokenizedReviews.add(t);
-				}
-			}
-		}
-		return tokenizedReviews;
-	}
-
 	public ArrayList<Review> getReviews() {
 		return this.dbDriver.getReviews();
 	}
