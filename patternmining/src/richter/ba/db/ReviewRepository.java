@@ -30,22 +30,6 @@ public class ReviewRepository {
 		return reviewPosSequences;
 	}
 
-	public ArrayList<String> getReviewsWithoutStopWords(int numberReviews) {
-		ArrayList<Review> reviews = dbDriver.getReviews(numberReviews);
-
-		ArrayList<String> reviewPosSequences = new ArrayList<String>();
-
-		for (Review review : reviews) {
-			if (review.getProPOS() != null) {
-				reviewPosSequences.add(review.getProPOS());
-			}
-			if (review.getContraPOS() != null) {
-				reviewPosSequences.add(review.getContraPOS());
-			}
-		}
-		return reviewPosSequences;
-	}
-
 	public ArrayList<Review> getReviews() {
 		return this.dbDriver.getReviews();
 	}
