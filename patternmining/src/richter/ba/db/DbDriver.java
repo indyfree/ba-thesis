@@ -11,7 +11,7 @@ import java.util.List;
 
 import richter.ba.entities.Review;
 
-public class DbDriver {
+class DbDriver {
 
 	private String url;
 	private String user;
