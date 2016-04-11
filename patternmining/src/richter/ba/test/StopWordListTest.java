@@ -1,5 +1,6 @@
 package richter.ba.test;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -37,4 +38,19 @@ public class StopWordListTest {
 
 		Assert.assertArrayEquals(expectedList.toArray(), actualList.toArray());
 	}
+
+	@Test
+	public void testContains() {
+		System.out.println(fullList);
+		String t = "knapp_ADJD :_$. Fehler_NN In_APPR siehe Bericht Siehe text -siehe Bericht--";
+		List<String> testList = new ArrayList<String>();
+		testList.add(t);
+
+		final String[] stopTags = { "$.", "$[", "siehe bericht", "siehe text", "-" };
+
+		System.out.println(t);
+		System.out.println(Filter.filterWords(testList, stopTags));
+
+	}
+
 }

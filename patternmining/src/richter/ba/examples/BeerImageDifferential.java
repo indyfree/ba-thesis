@@ -1,6 +1,7 @@
 package richter.ba.examples;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import richter.ba.algorithms.NGram;
 import richter.ba.utils.TagSet;
@@ -11,7 +12,7 @@ public class BeerImageDifferential {
 	public static void main(String[] args) {
 		final Tagger tagger = new Tagger(TagSet.GERMAN);
 
-		ArrayList<String> beerAssociations = new ArrayList<>();
+		List<String> beerAssociations = new ArrayList<>();
 		beerAssociations.add("leistungsstark");
 		beerAssociations.add("zuverlässig");
 		beerAssociations.add("etwas teurer als andere");
@@ -21,7 +22,7 @@ public class BeerImageDifferential {
 		beerAssociations.add("günstiger Preis");
 		beerAssociations.add("rutscht etwas");
 
-		ArrayList<String> taggedReviews = tagger.onlyTagList(beerAssociations);
+		List<String> taggedReviews = tagger.onlyTagList(beerAssociations);
 		System.out.println(taggedReviews);
 
 		NGram biGram = new NGram(2);

@@ -1,5 +1,8 @@
 package richter.ba.entities;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Review {
 
 	private int id;
@@ -18,6 +21,13 @@ public class Review {
 
 	public void setId(int id) {
 		this.id = id;
+	}
+
+	public List<String> getProContra() {
+		List<String> proContra = new ArrayList<String>();
+		proContra.add(pro);
+		proContra.add(contra);
+		return proContra;
 	}
 
 	public String getPro() {

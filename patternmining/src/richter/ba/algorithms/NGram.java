@@ -43,7 +43,7 @@ public class NGram implements Algorithm {
 		NGramModel nGramModel = new NGramModel();
 		for (String sequence : sequenceList) {
 
-			List<String> nGrams = NGramGenerator.generate(Arrays.asList(sequence.split(" ")), n, " ");
+			List<String> nGrams = NGramGenerator.generate(Arrays.asList(sequence.split("\\s+")), n, "-");
 
 			for (String nGram : nGrams) {
 				nGramModel.add(new StringList(nGram));

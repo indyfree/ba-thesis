@@ -1,6 +1,7 @@
 package richter.ba.utils;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -21,17 +22,18 @@ public class Tagger {
 	}
 
 	public String getTagOnlyString(String string) {
-		String[] tokens = tagger.tagString(string).split(" ");
+		String[] tokens = tagger.tagString(string).split("\\s+");
 		String tagString = "";
 
 		for (int i = 0; i < tokens.length; i++) {
 			tokens[i] = tokens[i].substring(tokens[i].lastIndexOf("_") + 1);
 			tagString += tokens[i] + " ";
 		}
-		return tagString;
+		return tagString.trim();
 	}
 
-	public void tagReviews(ArrayList<Review> list) {
+	public void tagReviews(List<Review> list) {
+		long startTime = System.currentTimeMillis();
 		for (Review r : list) {
 			if (r.getPro() != null) {
 				r.setProPOS(getTagOnlyString(r.getPro()));
@@ -40,28 +42,31 @@ public class Tagger {
 				r.setContraPOS(getTagOnlyString(r.getContra()));
 			}
 		}
-		LOGGER.info("{} elements tagged", list.size());
+		LOGGER.info("{} elements in {} seconds tagged", list.size(), (System.currentTimeMillis() - startTime) / 100);
 	}
 
-	public ArrayList<String> tagList(ArrayList<String> list) {
-		ArrayList<String> taggedList = new ArrayList<>();
+	public List<String> tagList(List<String> list) {
+		long startTime = System.currentTimeMillis();
+		List<String> taggedList = new ArrayList<>();
 		for (String element : list) {
 			if (element != null) {
 				taggedList.add(getTagString(element));
 			}
 		}
-		LOGGER.info("{} elements tagged", taggedList.size());
+		LOGGER.info("{} elements in {} seconds tagged", taggedList.size(),
+				(System.currentTimeMillis() - startTime) / 100);
 		return taggedList;
 	}
 
-	public ArrayList<String> onlyTagList(ArrayList<String> list) {
-		ArrayList<String> taggedList = new ArrayList<>();
+	public List<String> onlyTagList(List<String> list) {
+		long startTime = System.currentTimeMillis();
+		List<String> taggedList = new ArrayList<>();
 		for (String element : list) {
 			if (element != null) {
 				taggedList.add(getTagOnlyString(element));
 			}
 		}
-		LOGGER.info("{} elements tagged", taggedList.size());
+		LOGGER.info("{} elements in {} seconds tagged", list.size(), (System.currentTimeMillis() - startTime) / 100);
 		return taggedList;
 	}
 

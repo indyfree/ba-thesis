@@ -8,14 +8,16 @@ public class Tokenizer {
 	public static List<String> tokenizeSequences(List<String> sequences, String[] splitter) {
 		ArrayList<String> tokenizedSequences = new ArrayList<>();
 		String regex = regexBuilder(splitter);
-		System.out.println(regex);
 
 		for (String sequence : sequences) {
-			String[] token = sequence.split(regex);
-			for (String t : token) {
-				t = t.trim();
-				if (!t.isEmpty()) {
-					tokenizedSequences.add(t);
+			if (sequence != null && !sequence.trim().isEmpty()) {
+				String temp = sequence.replaceAll("\\s+", " ");
+				String[] tokens = temp.split(regex);
+				for (String token : tokens) {
+					String t = token.trim();
+					if (!t.isEmpty()) {
+						tokenizedSequences.add(t);
+					}
 				}
 			}
 		}

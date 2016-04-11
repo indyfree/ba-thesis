@@ -5,7 +5,9 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.List;
 
 import richter.ba.entities.Review;
 
@@ -88,6 +90,43 @@ public class DbDriver {
 					statement.setInt(5, r.getId());
 					statement.executeUpdate();
 				}
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+
+	public List<String> getPosSequences(int n) {
+		// TODO Auto-generated method stub
+		return null;
+
+	}
+
+	public void writePosSequences(List<String> posSequences) {
+		excecuteStatement(
+				"CREATE TABLE IF NOT EXISTS `review_ciao_2014`.`review_sequences_pos` (`id` INT NOT NULL AUTO_INCREMENT, `sequence` VARCHAR(255) NOT NULL, PRIMARY KEY (`id`)) ENGINE = MyISAM;");
+		excecuteStatement("TRUNCATE TABLE `review_ciao_2014`.`review_sequences_pos`;");
+
+		try (Connection connection = DriverManager.getConnection(this.url, this.user, this.password);) {
+			try (PreparedStatement statement = connection
+					.prepareStatement("INSERT INTO `review_ciao_2014`.`review_sequences_pos` (sequence) VALUES (?)")) {
+				for (String sequence : posSequences) {
+					statement.setString(1, sequence);
+					statement.addBatch();
+					statement.clearParameters();
+				}
+				statement.executeBatch();
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+
+	}
+
+	private void excecuteStatement(String sql) {
+		try (Connection connection = DriverManager.getConnection(this.url, this.user, this.password);) {
+			try (Statement stm = connection.createStatement()) {
+				stm.executeUpdate(sql);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
