@@ -48,52 +48,13 @@ class DbDriver {
 					int id = results.getInt("review_id");
 					String pro = results.getString("pro");
 					String contra = results.getString("contra");
-					String proPOS = results.getString("pro_tagged");
-					String contraPOS = results.getString("contra_tagged");
-
-					Review review = new Review(id);
-
-					if (pro != null && pro.trim() != "") {
-						review.setPro(pro.trim());
-					}
-
-					if (contra != null && contra.trim() != "") {
-						review.setContra(contra.trim());
-					}
-
-					if (proPOS != null && proPOS.trim() != "") {
-						review.setProPOS(proPOS.trim());
-					}
-
-					if (contraPOS != null && contraPOS.trim() != "") {
-						review.setContraPOS(contraPOS.trim());
-					}
-
-					reviews.add(review);
+					reviews.add(new Review(id, pro.trim(), contra.trim()));
 				}
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 		return reviews;
-	}
-
-	public void updateReviews(ArrayList<Review> reviews) {
-		try (Connection connection = DriverManager.getConnection(this.url, this.user, this.password);) {
-			try (PreparedStatement statement = connection.prepareStatement(
-					"UPDATE reviews_ciao SET pro = ?, contra = ?, pro_tagged = ?, contra_tagged =? WHERE review_id = ?")) {
-				for (Review r : reviews) {
-					statement.setString(1, r.getPro());
-					statement.setString(2, r.getContra());
-					statement.setString(3, r.getProPOS());
-					statement.setString(4, r.getContraPOS());
-					statement.setInt(5, r.getId());
-					statement.executeUpdate();
-				}
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
 	}
 
 	public List<String> getPosSequences(int n) {

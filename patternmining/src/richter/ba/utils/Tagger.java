@@ -7,7 +7,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import edu.stanford.nlp.tagger.maxent.MaxentTagger;
-import richter.ba.entities.Review;
 
 public class Tagger {
 	private MaxentTagger tagger;
@@ -30,19 +29,6 @@ public class Tagger {
 			tagString += tokens[i] + " ";
 		}
 		return tagString.trim();
-	}
-
-	public void tagReviews(List<Review> list) {
-		long startTime = System.currentTimeMillis();
-		for (Review r : list) {
-			if (r.getPro() != null) {
-				r.setProPOS(getTagOnlyString(r.getPro()));
-			}
-			if (r.getContra() != null) {
-				r.setContraPOS(getTagOnlyString(r.getContra()));
-			}
-		}
-		LOGGER.info("{} elements in {} seconds tagged", list.size(), (System.currentTimeMillis() - startTime) / 100);
 	}
 
 	public List<String> tagList(List<String> list) {

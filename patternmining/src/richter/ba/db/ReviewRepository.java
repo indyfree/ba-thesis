@@ -22,10 +22,4 @@ public class ReviewRepository {
 	public ArrayList<Review> getReviews(int number) {
 		return this.dbDriver.getReviews(number);
 	}
-
-	public void updateReviews(ArrayList<Review> reviews) {
-		this.dbDriver.updateReviews(reviews);
-
-	}
-
 }
