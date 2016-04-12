@@ -1,4 +1,4 @@
-package richter.ba.experiment;
+package richter.ba.preprocessing;
 
 import java.util.List;
 import java.util.stream.Collectors;
