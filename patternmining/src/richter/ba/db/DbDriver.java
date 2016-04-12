@@ -104,7 +104,7 @@ class DbDriver {
 
 	public void writePosSequences(List<String> posSequences) {
 		excecuteStatement(
-				"CREATE TABLE IF NOT EXISTS `review_ciao_2014`.`review_sequences_pos` (`id` INT NOT NULL AUTO_INCREMENT, `sequence` VARCHAR(255) NOT NULL, PRIMARY KEY (`id`)) ENGINE = MyISAM;");
+				"CREATE TABLE IF NOT EXISTS `review_ciao_2014`.`review_sequences_pos` (`id` INT NOT NULL AUTO_INCREMENT, `sequence` mediumtext NOT NULL, PRIMARY KEY (`id`)) ENGINE = MyISAM;");
 		excecuteStatement("TRUNCATE TABLE `review_ciao_2014`.`review_sequences_pos`;");
 
 		try (Connection connection = DriverManager.getConnection(this.url, this.user, this.password);) {
