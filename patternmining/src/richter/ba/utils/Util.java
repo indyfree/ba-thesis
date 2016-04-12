@@ -20,21 +20,6 @@ import ca.pfv.spmf.input.sequence_database_list_strings.SequenceDatabase;
 import richter.ba.entities.SequentialRule;
 
 public class Util {
-	/**
-	 * Taken from http://stackoverflow.com/a/2581754
-	 *
-	 * @param map
-	 * @return
-	 */
-	public static <K, V extends Comparable<? super V>> Map<K, V> sortByValue(Map<K, V> map) {
-		Map<K, V> result = new LinkedHashMap<>();
-		Stream<Entry<K, V>> st = map.entrySet().stream();
-
-		st.sorted(Comparator.comparing(e -> ((Entry<K, V>) e).getValue()).reversed())
-				.forEachOrdered(e -> result.put(e.getKey(), e.getValue()));
-
-		return result;
-	}
 
 	public static SequenceDatabase getSequenceDatabase(List<String> stringList) {
 		SequenceDatabase sequenceDB = new SequenceDatabase();
@@ -145,7 +130,7 @@ public class Util {
 					itemSetJ[i] = Integer.parseInt(rightSet[i].trim());
 				}
 
-				int support = Integer.valueOf(line.substring(line.indexOf("#SUP:") + 5, line.indexOf("#CONF:")).trim());
+				int support = Integer.valueOf(line.substring(line.indexOf("#SUP:") + 4, line.indexOf("#CONF:")).trim());
 				double confidence = Double.valueOf(line.substring(line.indexOf("#CONF:") + 6).trim());
 
 				rules.add(new SequentialRule(itemSetI, itemSetJ, support, confidence));
@@ -170,4 +155,19 @@ public class Util {
 		return null;
 	}
 
+	/**
+	 * Taken from http://stackoverflow.com/a/2581754
+	 *
+	 * @param map
+	 * @return
+	 */
+	public static <K, V extends Comparable<? super V>> Map<K, V> sortByValue(Map<K, V> map) {
+		Map<K, V> result = new LinkedHashMap<>();
+		Stream<Entry<K, V>> st = map.entrySet().stream();
+
+		st.sorted(Comparator.comparing(e -> ((Entry<K, V>) e).getValue()).reversed())
+				.forEachOrdered(e -> result.put(e.getKey(), e.getValue()));
+
+		return result;
+	}
 }
