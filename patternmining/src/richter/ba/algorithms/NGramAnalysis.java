@@ -15,14 +15,14 @@ import opennlp.tools.ngram.NGramModel;
 import opennlp.tools.util.StringList;
 import richter.ba.utils.Util;
 
-public class NGram implements Algorithm {
+public class NGramAnalysis implements Algorithm {
 
 	private int n;
 	private HashMap<String, Integer> nGramToQuantity;
 
-	final static Logger LOGGER = LoggerFactory.getLogger(NGram.class);
+	final static Logger LOGGER = LoggerFactory.getLogger(NGramAnalysis.class);
 
-	public NGram(int n) {
+	public NGramAnalysis(int n) {
 		this.n = n;
 	}
 

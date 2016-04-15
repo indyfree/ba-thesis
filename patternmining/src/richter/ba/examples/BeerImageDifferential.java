@@ -3,7 +3,7 @@ package richter.ba.examples;
 import java.util.ArrayList;
 import java.util.List;
 
-import richter.ba.algorithms.NGram;
+import richter.ba.algorithms.NGramAnalysis;
 import richter.ba.utils.TagSet;
 import richter.ba.utils.Tagger;
 
@@ -25,10 +25,10 @@ public class BeerImageDifferential {
 		List<String> taggedReviews = tagger.onlyTagList(beerAssociations);
 		System.out.println(taggedReviews);
 
-		NGram biGram = new NGram(2);
+		NGramAnalysis biGram = new NGramAnalysis(2);
 		biGram.run(taggedReviews);
 
-		NGram uniGram = new NGram(1);
+		NGramAnalysis uniGram = new NGramAnalysis(1);
 		uniGram.run(taggedReviews);
 	}
 

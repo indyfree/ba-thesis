@@ -1,6 +1,6 @@
 package richter.ba.examples;
 
-import richter.ba.algorithms.NGram;
+import richter.ba.algorithms.NGramAnalysis;
 import richter.ba.db.ReviewRepository;
 
 public class NGramTest {
@@ -13,7 +13,7 @@ public class NGramTest {
 		// Algorithm biGram = new NGram(2);
 		// biGram.run(productReviews);
 
-		NGram triGram = new NGram(2);
+		NGramAnalysis triGram = new NGramAnalysis(2);
 		// triGram.run(productReviews, 10);
 		//
 		// BIDE bide = new BIDE(1);
