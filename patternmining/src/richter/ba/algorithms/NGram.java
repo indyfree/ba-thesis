@@ -71,13 +71,14 @@ public class NGram implements Algorithm {
 
 	}
 
-	public void writeNGramsToFile(String fileName) {
+	public void writeNGramsToFile(String fileName, int k) {
 		Writer fw = null;
 		try {
 			fw = new FileWriter(fileName);
-			for (String key : this.nGramToQuantity.keySet()) {
-				fw.write(key + ",");
-				fw.append(this.nGramToQuantity.get(key).toString());
+			for (int i = 0; i < k; i++) {
+				String nGram = (String) nGramToQuantity.keySet().toArray()[i];
+				fw.write(nGram + " : ");
+				fw.append(this.nGramToQuantity.get(nGram).toString());
 				// float percent = ((float) sortedMap.get(key) * 100 /
 				// countnGrams);
 				// fw.append(String.format("%.2f", percent));

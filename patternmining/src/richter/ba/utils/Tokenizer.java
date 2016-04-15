@@ -11,7 +11,7 @@ public class Tokenizer {
 
 		for (String sequence : sequences) {
 			if (sequence != null && !sequence.trim().isEmpty()) {
-				String temp = sequence.replaceAll("\\s+", " ");
+				String temp = sequence.replaceAll("\\s+", " ").trim();
 				String[] tokens = temp.split(regex);
 				for (String token : tokens) {
 					String t = token.trim();

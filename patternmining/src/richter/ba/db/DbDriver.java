@@ -48,7 +48,7 @@ class DbDriver {
 					int id = results.getInt("review_id");
 					String pro = results.getString("pro");
 					String contra = results.getString("contra");
-					reviews.add(new Review(id, pro.trim(), contra.trim()));
+					reviews.add(new Review(id, pro, contra));
 				}
 			}
 		} catch (SQLException e) {

@@ -22,6 +22,10 @@ public class PosSequenceRepository {
 		return this.dbDriver.getPosSequences(n);
 	}
 
+	public List<String> getPosSequences() {
+		return this.dbDriver.getPosSequences(-1);
+	}
+
 	public void writePosSequences(List<String> posSequences) {
 		long startTime = System.currentTimeMillis();
 		this.dbDriver.writePosSequences(posSequences);
