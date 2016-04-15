@@ -1,10 +1,7 @@
 package richter.ba.algorithms;
 
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.Writer;
+import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -13,12 +10,12 @@ import org.slf4j.LoggerFactory;
 import opennlp.tools.ngram.NGramGenerator;
 import opennlp.tools.ngram.NGramModel;
 import opennlp.tools.util.StringList;
-import richter.ba.utils.Util;
+import richter.ba.entities.NGram;
 
 public class NGramAnalysis implements Algorithm {
 
 	private int n;
-	private HashMap<String, Integer> nGramToQuantity;
+	private List<NGram> nGrams;
 
 	final static Logger LOGGER = LoggerFactory.getLogger(NGramAnalysis.class);
 
@@ -28,17 +25,18 @@ public class NGramAnalysis implements Algorithm {
 
 	@Override
 	public void run(List<String> input) {
-		this.nGramToQuantity = getNGramsWithQuantity(n, input);
-		this.printResults(this.nGramToQuantity.size());
+		this.nGrams = getNGrams(n, input);
+		this.printResults(this.nGrams.size());
 	}
 
 	public void run(List<String> input, int k) {
-		this.nGramToQuantity = getNGramsWithQuantity(n, input);
+		this.nGrams = getNGrams(n, input);
 		this.printResults(k);
 	}
 
-	private HashMap<String, Integer> getNGramsWithQuantity(int n, List<String> sequenceList) {
+	private List<NGram> getNGrams(int n, List<String> sequenceList) {
 		long startTime = System.currentTimeMillis();
+		int totalCount = 0;
 
 		NGramModel nGramModel = new NGramModel();
 		for (String sequence : sequenceList) {
@@ -47,54 +45,57 @@ public class NGramAnalysis implements Algorithm {
 
 			for (String nGram : nGrams) {
 				nGramModel.add(new StringList(nGram));
+				totalCount++;
 			}
 		}
 
-		HashMap<String, Integer> nGramMap = new HashMap<String, Integer>();
+		List<NGram> nGrams = new ArrayList<NGram>();
 		for (String nGram : nGramModel.toDictionary().asStringSet()) {
-			nGramMap.put(nGram, nGramModel.getCount(new StringList(nGram)));
+
+			int count = nGramModel.getCount(new StringList(nGram));
+			double frequency = count / totalCount;
+			nGrams.add(new NGram(nGram, count, frequency));
 		}
 
-		nGramMap = (HashMap<String, Integer>) Util.sortByValue(nGramMap);
+		LOGGER.info("Mined {} Sequences and found {} {}Grams in {} seconds", sequenceList.size(), nGrams.size(), this.n,
+				(System.currentTimeMillis() - startTime) / 100);
 
-		LOGGER.info("Mined {} Sequences and found {} {}Grams in {} seconds", sequenceList.size(), nGramMap.size(),
-				this.n, (System.currentTimeMillis() - startTime) / 100);
-
-		return nGramMap;
+		return nGrams;
 	}
 
 	private void printResults(int k) {
 		for (int i = 0; i < k; i++) {
-			String nGram = (String) nGramToQuantity.keySet().toArray()[i];
-			LOGGER.info("[{}] occured {} times", nGram, nGramToQuantity.get(nGram));
+			NGram nGram = this.nGrams.get(i);
+			LOGGER.info("[{}] occured {} times, thats {}% of all found {}-Grams", nGram.getContent(), nGram.getCount(),
+					nGram.getFrequency(), this.n);
 		}
 
 	}
 
-	public void writeNGramsToFile(String fileName, int k) {
-		Writer fw = null;
-		try {
-			fw = new FileWriter(fileName);
-			for (int i = 0; i < k; i++) {
-				String nGram = (String) nGramToQuantity.keySet().toArray()[i];
-				fw.write(nGram + " : ");
-				fw.append(this.nGramToQuantity.get(nGram).toString());
-				// float percent = ((float) sortedMap.get(key) * 100 /
-				// countnGrams);
-				// fw.append(String.format("%.2f", percent));
-				fw.append(System.getProperty("line.separator"));
-			}
-		} catch (IOException e) {
-			System.err.println("Could not create File");
-		} finally {
-			if (fw != null)
-				try {
-					fw.close();
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
-		}
-	}
+	// public void writeNGramsToFile(String fileName, int k) {
+	// Writer fw = null;
+	// try {
+	// fw = new FileWriter(fileName);
+	// for (int i = 0; i < k; i++) {
+	// String nGram = (String) nGramToQuantity.keySet().toArray()[i];
+	// fw.write(nGram + " : ");
+	// fw.append(this.nGramToQuantity.get(nGram).toString());
+	// // float percent = ((float) sortedMap.get(key) * 100 /
+	// // countnGrams);
+	// // fw.append(String.format("%.2f", percent));
+	// fw.append(System.getProperty("line.separator"));
+	// }
+	// } catch (IOException e) {
+	// System.err.println("Could not create File");
+	// } finally {
+	// if (fw != null)
+	// try {
+	// fw.close();
+	// } catch (IOException e) {
+	// e.printStackTrace();
+	// }
+	// }
+	// }
 
 	// /**
 	// * Taken from http://stackoverflow.com/a/3656824
