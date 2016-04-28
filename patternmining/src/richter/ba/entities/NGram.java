@@ -1,6 +1,6 @@
 package richter.ba.entities;
 
-public class NGram {
+public class NGram implements Comparable<NGram> {
 
 	private String content;
 	private int count;
@@ -34,5 +34,10 @@ public class NGram {
 
 	public void setFrequency(double frequency) {
 		this.frequency = frequency;
+	}
+
+	@Override
+	public int compareTo(NGram o) {
+		return o.getCount() - this.count;
 	}
 }

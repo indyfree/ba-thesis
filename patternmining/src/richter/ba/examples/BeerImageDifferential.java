@@ -3,7 +3,6 @@ package richter.ba.examples;
 import java.util.ArrayList;
 import java.util.List;
 
-import richter.ba.algorithms.NGramAnalysis;
 import richter.ba.utils.TagSet;
 import richter.ba.utils.Tagger;
 
@@ -22,14 +21,24 @@ public class BeerImageDifferential {
 		beerAssociations.add("günstiger Preis");
 		beerAssociations.add("rutscht etwas");
 
-		List<String> taggedReviews = tagger.onlyTagList(beerAssociations);
-		System.out.println(taggedReviews);
+		String iphone = "Das iPhone hat ein großes Display";
+		System.out.println(tagger.getTagString(iphone));
+		// List<String> taggedReviews = tagger.onlyTagList(beerAssociations);
+		// System.out.println(taggedReviews);
 
-		NGramAnalysis biGram = new NGramAnalysis(2);
-		biGram.run(taggedReviews);
+		// Algorithm bide = new BIDE(0);
+		// bide.run(taggedReviews);
+		// bide.printStatistics();
+		//
+		// Algorithm lapin = new LAPIN(0);
+		// lapin.run(taggedReviews);
+		// lapin.printStatistics();
 
-		NGramAnalysis uniGram = new NGramAnalysis(1);
-		uniGram.run(taggedReviews);
+		// NGramAnalysis biGram = new NGramAnalysis(2);
+		// biGram.run(taggedReviews);
+		//
+		// NGramAnalysis uniGram = new NGramAnalysis(1);
+		// uniGram.run(taggedReviews);
 	}
 
 }

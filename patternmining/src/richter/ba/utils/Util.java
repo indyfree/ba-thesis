@@ -5,6 +5,8 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Writer;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.HashMap;
@@ -169,5 +171,21 @@ public class Util {
 				.forEachOrdered(e -> result.put(e.getKey(), e.getValue()));
 
 		return result;
+	}
+
+	/**
+	 * Taken from http://stackoverflow.com/a/2808648
+	 * 
+	 * @param value
+	 * @param places
+	 * @return
+	 */
+	public static double round(double value, int places) {
+		if (places < 0)
+			throw new IllegalArgumentException();
+
+		BigDecimal bd = new BigDecimal(value);
+		bd = bd.setScale(places, RoundingMode.HALF_UP);
+		return bd.doubleValue();
 	}
 }

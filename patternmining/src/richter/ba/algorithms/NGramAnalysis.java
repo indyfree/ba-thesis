@@ -2,6 +2,7 @@ package richter.ba.algorithms;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -11,6 +12,7 @@ import opennlp.tools.ngram.NGramGenerator;
 import opennlp.tools.ngram.NGramModel;
 import opennlp.tools.util.StringList;
 import richter.ba.entities.NGram;
+import richter.ba.utils.Util;
 
 public class NGramAnalysis implements Algorithm {
 
@@ -53,13 +55,14 @@ public class NGramAnalysis implements Algorithm {
 		for (String nGram : nGramModel.toDictionary().asStringSet()) {
 
 			int count = nGramModel.getCount(new StringList(nGram));
-			double frequency = count / totalCount;
+			double frequency = Util.round(((double) count / totalCount) * 100, 3);
 			nGrams.add(new NGram(nGram, count, frequency));
 		}
 
-		LOGGER.info("Mined {} Sequences and found {} {}Grams in {} seconds", sequenceList.size(), nGrams.size(), this.n,
+		LOGGER.info("Mined {} NGrams and found {} {}Grams in {} seconds", totalCount, nGrams.size(), this.n,
 				(System.currentTimeMillis() - startTime) / 100);
 
+		Collections.sort(nGrams);
 		return nGrams;
 	}
 
