@@ -1,7 +1,9 @@
 package richter.ba.examples;
 
 import java.util.ArrayList;
+import java.util.List;
 
+import richter.ba.algorithms.BIDE;
 import richter.ba.utils.TagSet;
 import richter.ba.utils.Tagger;
 
@@ -9,8 +11,7 @@ public class BeetleBCM {
 	public static void main(String[] args) {
 		final Tagger tagger = new Tagger(TagSet.ENGLISH);
 
-		ArrayList<String> beetleAssociations = new ArrayList<>();
-
+		List<String> beetleAssociations = new ArrayList<>();
 		beetleAssociations.add("fun to drive");
 		beetleAssociations.add("neat colors");
 		beetleAssociations.add("German car");
@@ -27,6 +28,10 @@ public class BeetleBCM {
 
 		System.out.println(tagger.tagList(beetleAssociations));
 
+		List<String> taggedBeetleAssociations = tagger.onlyTagList(beetleAssociations);
+		final int min_sup = 0;
+		BIDE bide = new BIDE(min_sup);
+		bide.run(taggedBeetleAssociations);
 	}
 
 }

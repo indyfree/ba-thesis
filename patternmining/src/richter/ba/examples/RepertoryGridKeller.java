@@ -2,8 +2,8 @@ package richter.ba.examples;
 
 import java.util.ArrayList;
 
-import richter.ba.utils.Tagger;
 import richter.ba.utils.TagSet;
+import richter.ba.utils.Tagger;
 
 public class RepertoryGridKeller {
 
@@ -12,6 +12,7 @@ public class RepertoryGridKeller {
 
 		ArrayList<String> reperpetoryGrid = new ArrayList<>();
 		reperpetoryGrid.add("No mystique");
+		reperpetoryGrid.add("Common shape");
 		reperpetoryGrid.add("Classy");
 		reperpetoryGrid.add("Low price");
 		reperpetoryGrid.add("Non european");
