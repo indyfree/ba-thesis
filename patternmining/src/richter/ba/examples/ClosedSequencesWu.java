@@ -3,7 +3,6 @@ package richter.ba.examples;
 import java.util.ArrayList;
 
 import richter.ba.algorithms.BIDE;
-import richter.ba.algorithms.LAPIN;
 
 public class ClosedSequencesWu {
 
@@ -18,9 +17,5 @@ public class ClosedSequencesWu {
 		BIDE bide = new BIDE(3);
 		bide.run(sequences);
 		bide.printStatistics();
-
-		LAPIN lapin = new LAPIN(3);
-		lapin.run(sequences);
-		lapin.printStatistics();
 	}
 }
