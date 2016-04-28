@@ -2,7 +2,6 @@ package richter.ba.experiment;
 
 import java.util.List;
 
-import richter.ba.algorithms.Algorithm;
 import richter.ba.algorithms.BIDE;
 import richter.ba.db.PosSequenceRepository;
 
@@ -13,7 +12,7 @@ public class PatternMiningReviews {
 		PosSequenceRepository seqRep = new PosSequenceRepository();
 		List<String> reviewSequences = seqRep.getPosSequences(1000000);
 
-		Algorithm bide = new BIDE(reviewSequences.size() / 20);
+		BIDE bide = new BIDE(reviewSequences.size() / 20);
 		bide.run(reviewSequences);
 	}
 }

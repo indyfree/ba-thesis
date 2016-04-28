@@ -6,6 +6,11 @@ import richter.ba.algorithms.BIDE;
 
 public class ClosedSequencesWu {
 
+	/**
+	 * Analysis of Figure 3 in Thesis
+	 * 
+	 * @param args
+	 */
 	public static void main(String[] args) {
 
 		ArrayList<String> sequences = new ArrayList<>();

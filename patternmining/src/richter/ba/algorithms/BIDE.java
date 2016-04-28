@@ -11,7 +11,7 @@ import ca.pfv.spmf.algorithms.sequentialpatterns.BIDE_and_prefixspan_with_string
 import ca.pfv.spmf.input.sequence_database_list_strings.SequenceDatabase;
 import richter.ba.utils.Util;
 
-public class BIDE implements Algorithm {
+public class BIDE {
 	final static Logger LOGGER = LoggerFactory.getLogger(BIDE.class);
 	final static String FILEPATH = "BIDE_results.txt";
 
@@ -24,7 +24,6 @@ public class BIDE implements Algorithm {
 		this.bide = new AlgoBIDEPlus_withStrings();
 	}
 
-	@Override
 	public void run(List<String> input) {
 		SequenceDatabase sequenceDB = Util.getSequenceDatabase(input);
 		this.totalSequences = sequenceDB.size();
@@ -33,7 +32,6 @@ public class BIDE implements Algorithm {
 		printResults();
 	}
 
-	@Override
 	public void printStatistics() {
 		bide.printStatistics(0);
 	}

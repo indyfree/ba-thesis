@@ -14,7 +14,7 @@ import opennlp.tools.util.StringList;
 import richter.ba.entities.NGram;
 import richter.ba.utils.Util;
 
-public class NGramAnalysis implements Algorithm {
+public class NGramAnalysis {
 
 	private int n;
 	private List<NGram> nGrams;
@@ -25,7 +25,6 @@ public class NGramAnalysis implements Algorithm {
 		this.n = n;
 	}
 
-	@Override
 	public void run(List<String> input) {
 		this.nGrams = getNGrams(n, input);
 		this.printResults(this.nGrams.size());
@@ -74,11 +73,4 @@ public class NGramAnalysis implements Algorithm {
 		}
 
 	}
-
-	@Override
-	public void printStatistics() {
-		// TODO Auto-generated method stub
-
-	}
-
 }
