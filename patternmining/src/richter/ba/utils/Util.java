@@ -19,7 +19,6 @@ import java.util.stream.Stream;
 
 import ca.pfv.spmf.input.sequence_database_list_strings.Sequence;
 import ca.pfv.spmf.input.sequence_database_list_strings.SequenceDatabase;
-import richter.ba.entities.SequentialRule;
 
 public class Util {
 
@@ -111,40 +110,6 @@ public class Util {
 		return Util.sortByValue(patternToQuantity);
 	}
 
-	public static ArrayList<SequentialRule> readRulesFromFile(String filePath, Map<String, Integer> patternLookup) {
-		ArrayList<SequentialRule> rules = new ArrayList<>();
-		String line;
-
-		try {
-			BufferedReader reader = new BufferedReader(new FileReader(filePath));
-			while ((line = reader.readLine()) != null) {
-
-				String[] leftSet = line.substring(0, line.lastIndexOf("==>") - 1).split(",");
-				int[] itemSetI = new int[leftSet.length];
-				for (int i = 0; i < leftSet.length; i++) {
-					itemSetI[i] = Integer.parseInt(leftSet[i].trim());
-				}
-
-				String[] rightSet = line.substring(line.lastIndexOf("==>") + 3, line.lastIndexOf("#SUP")).trim()
-						.split(",");
-				int[] itemSetJ = new int[rightSet.length];
-				for (int i = 0; i < rightSet.length; i++) {
-					itemSetJ[i] = Integer.parseInt(rightSet[i].trim());
-				}
-
-				int support = Integer.valueOf(line.substring(line.indexOf("#SUP:") + 4, line.indexOf("#CONF:")).trim());
-				double confidence = Double.valueOf(line.substring(line.indexOf("#CONF:") + 6).trim());
-
-				rules.add(new SequentialRule(itemSetI, itemSetJ, support, confidence));
-			}
-			reader.close();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-
-		return rules;
-	}
-
 	/*
 	 * Taken from http://stackoverflow.com/a/2904266
 	 */
@@ -175,7 +140,7 @@ public class Util {
 
 	/**
 	 * Taken from http://stackoverflow.com/a/2808648
-	 * 
+	 *
 	 * @param value
 	 * @param places
 	 * @return
