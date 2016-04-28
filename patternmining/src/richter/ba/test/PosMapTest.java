@@ -19,7 +19,7 @@ public class PosMapTest {
 		List<String> expected = new ArrayList<String>();
 		expected.add("ADJ ADJ NOUN NOUN ADV ADP");
 
-		List<String> actual = PosMapper.mapTags(origin, "taggers/de-negra.map");
+		List<String> actual = PosMapper.mapTags(origin, "maps/de-negra.map");
 		System.out.println(actual);
 
 		Assert.assertArrayEquals(expected.toArray(), actual.toArray());

@@ -18,7 +18,7 @@ public class NGramReviews {
 		PosSequenceRepository seqRep = new PosSequenceRepository();
 		List<String> reviewSequences = seqRep.getPosSequences();
 
-		List<String> universalPosSequences = PosMapper.mapTags(reviewSequences, "taggers/de-negra.map");
+		List<String> universalPosSequences = PosMapper.mapTags(reviewSequences, "maps/de-negra.map");
 
 		// NGramAnalysis uniGram = new NGramAnalysis(1);
 		// uniGram.run(universalPosSequences, 5);

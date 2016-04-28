@@ -12,8 +12,6 @@ public class PatternMiningReviews {
 
 		PosSequenceRepository seqRep = new PosSequenceRepository();
 		List<String> reviewSequences = seqRep.getPosSequences(1000000);
-		// reviewSequences = PosMapper.mapTags(reviewSequences,
-		// "taggers/de-negra.map");
 
 		Algorithm bide = new BIDE(reviewSequences.size() / 20);
 		bide.run(reviewSequences);
