@@ -59,7 +59,7 @@ public class NGramAnalysis implements Algorithm {
 			nGrams.add(new NGram(nGram, count, frequency));
 		}
 
-		LOGGER.info("Mined {} NGrams and found {} {}Grams in {} seconds", totalCount, nGrams.size(), this.n,
+		LOGGER.info("Mined {} {}Grams and found {} {}Grams in {} seconds", totalCount, this.n, nGrams.size(), this.n,
 				(System.currentTimeMillis() - startTime) / 100);
 
 		Collections.sort(nGrams);
@@ -74,53 +74,6 @@ public class NGramAnalysis implements Algorithm {
 		}
 
 	}
-
-	// public void writeNGramsToFile(String fileName, int k) {
-	// Writer fw = null;
-	// try {
-	// fw = new FileWriter(fileName);
-	// for (int i = 0; i < k; i++) {
-	// String nGram = (String) nGramToQuantity.keySet().toArray()[i];
-	// fw.write(nGram + " : ");
-	// fw.append(this.nGramToQuantity.get(nGram).toString());
-	// // float percent = ((float) sortedMap.get(key) * 100 /
-	// // countnGrams);
-	// // fw.append(String.format("%.2f", percent));
-	// fw.append(System.getProperty("line.separator"));
-	// }
-	// } catch (IOException e) {
-	// System.err.println("Could not create File");
-	// } finally {
-	// if (fw != null)
-	// try {
-	// fw.close();
-	// } catch (IOException e) {
-	// e.printStackTrace();
-	// }
-	// }
-	// }
-
-	// /**
-	// * Taken from http://stackoverflow.com/a/3656824
-	// *
-	// * @param n
-	// * @param str
-	// * @return
-	// */
-	// private List<String> nGrams(int n, String str) {
-	// List<String> ngrams = new ArrayList<String>();
-	// String[] words = str.split(" ");
-	// for (int i = 0; i < words.length - n + 1; i++)
-	// ngrams.add(concat(words, i, i + n));
-	// return ngrams;
-	// }
-	//
-	// private String concat(String[] words, int start, int end) {
-	// StringBuilder sb = new StringBuilder();
-	// for (int i = start; i < end; i++)
-	// sb.append((i > start ? " " : "") + words[i]);
-	// return sb.toString();
-	// }
 
 	@Override
 	public void printStatistics() {
