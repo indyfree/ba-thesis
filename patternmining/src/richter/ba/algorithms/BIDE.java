@@ -4,15 +4,11 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import ca.pfv.spmf.algorithms.sequentialpatterns.BIDE_and_prefixspan_with_strings.AlgoBIDEPlus_withStrings;
 import ca.pfv.spmf.input.sequence_database_list_strings.SequenceDatabase;
 import richter.ba.utils.Util;
 
 public class BIDE {
-	final static Logger LOGGER = LoggerFactory.getLogger(BIDE.class);
 	final static String FILEPATH = "BIDE_results.txt";
 
 	private int minSup;
@@ -40,8 +36,6 @@ public class BIDE {
 		try {
 			long start = System.currentTimeMillis();
 			this.bide.runAlgorithm(sequenceDB, FILEPATH, minSup);
-			LOGGER.info("Mined {} Sequences with BIDE+ in {} seconds", sequenceDB.size(),
-					(System.currentTimeMillis() - start) / 100);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -53,9 +47,6 @@ public class BIDE {
 		for (String pattern : patternToQuantity.keySet()) {
 			int support = patternToQuantity.get(pattern);
 			float percentage = (float) support * 100 / this.totalSequences;
-
-			LOGGER.info("{} has been detected {} times and occurs in {}% of all sequences", pattern, support,
-					percentage);
 		}
 	}
 

@@ -14,8 +14,6 @@ import richter.ba.utils.Tokenizer;
 
 public class PreProcessor {
 
-	final static Logger LOGGER = LoggerFactory.getLogger(PreProcessor.class);
-
 	public static List<String> run(List<Review> reviews, String[] splitter, String[] stopWords, String[] stopTags) {
 
         // 1. transform pro and contra reviews to a list of strings sequences
@@ -36,6 +34,5 @@ public class PreProcessor {
 		List<String> filteredTaggedSequences = Filter.filterWords(taggedSequences, stopTags);
 
 		return filteredTaggedSequences;
-
 	}
 }

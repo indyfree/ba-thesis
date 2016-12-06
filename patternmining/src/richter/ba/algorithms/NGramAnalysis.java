@@ -57,10 +57,6 @@ public class NGramAnalysis {
 			double frequency = Util.round(((double) count / totalCount) * 100, 3);
 			nGrams.add(new NGram(nGram, count, frequency));
 		}
-
-		LOGGER.info("Mined {} {}Grams and found {} {}Grams in {} seconds", totalCount, this.n, nGrams.size(), this.n,
-				(System.currentTimeMillis() - startTime) / 100);
-
 		Collections.sort(nGrams);
 		return nGrams;
 	}

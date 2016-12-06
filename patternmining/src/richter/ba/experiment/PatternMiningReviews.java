@@ -2,17 +2,12 @@ package richter.ba.experiment;
 
 import java.util.List;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import richter.ba.algorithms.BIDE;
 import richter.ba.db.PosSequenceRepository;
 
 public class PatternMiningReviews {
 
-	final static Logger LOGGER = LoggerFactory.getLogger(PatternMiningReviews.class);
-
-	/**
+    /**
 	 * Main Pattern Mining Method. This Method was used to perform Closed
 	 * Sequential Pattern Mining on Reviews
 	 *
@@ -27,10 +22,13 @@ public class PatternMiningReviews {
 	 */
 	public static void main(String[] args) {
 
+        // 1. get preprocessed pos sequences from database
 		PosSequenceRepository sequenceRepository = new PosSequenceRepository();
-		List<String> reviewSequences = sequenceRepository.getPosSequences(1000000);
+		List<String> reviewSequences = sequenceRepository.getPosSequences();
 
-		BIDE bide = new BIDE(reviewSequences.size() / 20);
+        // 2. analyse pos sequences with pattern mining algorithm BIDE and defined support s
+        int support = reviewSequences.size() / 20;
+		BIDE bide = new BIDE(support);
 		bide.run(reviewSequences);
 	}
 }

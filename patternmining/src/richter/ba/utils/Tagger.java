@@ -32,27 +32,22 @@ public class Tagger {
 	}
 
 	public List<String> tagList(List<String> list) {
-		long startTime = System.currentTimeMillis();
 		List<String> taggedList = new ArrayList<>();
 		for (String element : list) {
 			if (element != null) {
 				taggedList.add(getTagString(element));
 			}
 		}
-		LOGGER.info("{} elements in {} seconds tagged", taggedList.size(),
-				(System.currentTimeMillis() - startTime) / 100);
 		return taggedList;
 	}
 
 	public List<String> onlyTagList(List<String> list) {
-		long startTime = System.currentTimeMillis();
 		List<String> taggedList = new ArrayList<>();
 		for (String element : list) {
 			if (element != null) {
 				taggedList.add(getTagOnlyString(element));
 			}
 		}
-		LOGGER.info("{} elements in {} seconds tagged", list.size(), (System.currentTimeMillis() - startTime) / 100);
 		return taggedList;
 	}
 
