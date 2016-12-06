@@ -43,7 +43,7 @@ public class Util {
 		return sequenceDB;
 	}
 
-	public static Map<String, Integer> StringsToIntegerMap(List<String> input) {
+	public static Map<String, Integer> stringsToIntegerMap(List<String> input) {
 		Map<String, Integer> stringToInt = new HashMap<String, Integer>();
 		int value = 1;
 

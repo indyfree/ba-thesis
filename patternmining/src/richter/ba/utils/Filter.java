@@ -32,7 +32,7 @@ public class Filter {
 				s = s.replaceAll("(?i)" + Pattern.quote(stopWord), "").replaceAll("\\s+", " ").trim();
 			}
 
-			if (!s.equals("") && s != null) {
+			if (!s.equals("")) {
 				filteredSequences.add(s);
 			}
 
