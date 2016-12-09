@@ -22,12 +22,12 @@ public class PatternMiningReviews {
 	 */
 	public static void main(String[] args) {
 
-        // 1. get preprocessed pos sequences from database
+		// 1. get preprocessed pos sequences from database
 		PosSequenceRepository sequenceRepository = new PosSequenceRepository();
 		List<String> reviewSequences = sequenceRepository.getPosSequences();
 
-        // 2. analyse pos sequences with pattern mining algorithm BIDE and defined support s
-        int support = reviewSequences.size() / 20;
+		// 2. analyse pos sequences with pattern mining algorithm BIDE and defined support s
+		int support = reviewSequences.size() / 20;
 		BIDE bide = new BIDE(support);
 		bide.run(reviewSequences);
 	}

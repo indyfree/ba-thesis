@@ -41,7 +41,6 @@ public class NGramAnalysis {
 
 		NGramModel nGramModel = new NGramModel();
 		for (String sequence : sequenceList) {
-
 			List<String> nGrams = NGramGenerator.generate(Arrays.asList(sequence.split("\\s+")), n, "-");
 
 			for (String nGram : nGrams) {
@@ -52,10 +51,10 @@ public class NGramAnalysis {
 
 		List<NGram> nGrams = new ArrayList<NGram>();
 		for (String nGram : nGramModel.toDictionary().asStringSet()) {
-
 			int count = nGramModel.getCount(new StringList(nGram));
 			double frequency = Util.round(((double) count / totalCount) * 100, 3);
-			nGrams.add(new NGram(nGram, count, frequency));
+			
+            nGrams.add(new NGram(nGram, count, frequency));
 		}
 		Collections.sort(nGrams);
 		return nGrams;
