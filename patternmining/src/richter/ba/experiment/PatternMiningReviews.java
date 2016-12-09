@@ -26,7 +26,7 @@ public class PatternMiningReviews {
 		PosSequenceRepository sequenceRepository = new PosSequenceRepository();
 		List<String> reviewSequences = sequenceRepository.getPosSequences();
 
-		// 2. analyse pos sequences with pattern mining algorithm BIDE and defined support s
+		// 2. analyse pos sequences with closed pattern mining algorithm BIDE and defined support s
 		int support = reviewSequences.size() / 20;
 		BIDE bide = new BIDE(support);
 		bide.run(reviewSequences);
