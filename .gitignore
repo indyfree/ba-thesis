@@ -1,4 +1,5 @@
 patternmining/bin
-*.txt
-patternmining/.classpath
 patternmining/lib
+sql/
+*.txt
+.classpath
